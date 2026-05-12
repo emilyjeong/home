@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -14,393 +13,316 @@
 <style>
   :root {
     color-scheme: dark only;
-
-```
-/* 배경 레이어 */
---bg:        #0a0a09;
---surface:   #0f0f0e;
---card:      #161513;
---card-hi:   #1c1b19;
-
-/* 테두리 */
---border:     #2a2926;
---border-mid: #353330;
-
-/* 텍스트 */
---ink:     #f0ede8;
---ink-mid: #9a9690;
---ink-dim: #565250;
-
-/* 의미색 */
---pos:    #00c98a;
---neg:    #f04d62;
---accent: #e8b800;
---info:   #5aabf0;
---purple: #b8a8f0;
-
-/* 레이아웃 */
---radius:    14px;
---radius-sm:  8px;
---radius-xs:  6px;
---pad:        16px;
---gap:        10px;
---max-width:  480px;
-
-/* 폰트 */
---font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
---font-mono: 'JetBrains Mono', monospace;
-```
-
-}
-
-- { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-/* 배경 강제 — html, body 양쪽 모두 */
-html {
-background-color: #0a0a09 !important;
-background: #0a0a09 !important;
-min-height: 100%;
-}
-body {
-background-color: #0a0a09 !important;
-background: #0a0a09 !important;
-color: var(–ink);
-font-family: var(–font-sans);
--webkit-font-smoothing: antialiased;
-min-height: 100vh;
-overflow-x: hidden;
-}
-
-/* iOS Safari 다크모드 무시 방지 */
-@media (prefers-color-scheme: light) {
-html, body {
-background-color: #0a0a09 !important;
-background: #0a0a09 !important;
-color: #f0ede8 !important;
-}
-}
-
-.wrap {
-max-width: var(–max-width);
-margin: 0 auto;
-padding: 28px var(–pad) 40px;
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-background-color: var(–bg);
-}
-
-/* 시스템 헤더 */
-.head {
-display: flex;
-align-items: center;
-justify-content: space-between;
-font-family: var(–font-mono);
-font-size: 10px;
-font-weight: 600;
-letter-spacing: 0.12em;
-color: var(–ink-dim);
-text-transform: uppercase;
-margin-bottom: 28px;
-}
-
-.head .dot {
-display: inline-block;
-width: 6px;
-height: 6px;
-background: var(–pos);
-border-radius: 50%;
-margin-right: 8px;
-box-shadow: 0 0 8px rgba(0, 201, 138, 0.6);
-animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-0%, 100% { opacity: 1; }
-50% { opacity: 0.4; }
-}
-
-/* 타이틀 */
-.title {
-font-size: 38px;
-font-weight: 800;
-line-height: 1.05;
-letter-spacing: -0.03em;
-color: var(–ink);
-margin-bottom: 40px;
-}
-
-.title .accent { color: var(–purple); }
-
-/* 섹션 라벨 */
-.section-label {
-display: flex;
-align-items: center;
-gap: 10px;
-font-family: var(–font-sans);
-font-size: 11px;
-font-weight: 600;
-letter-spacing: 0.15em;
-color: var(–ink-dim);
-text-transform: uppercase;
-margin-bottom: 14px;
-}
-.section-label::after {
-content: ‘’;
-flex: 1;
-height: 1px;
-background: var(–border);
-}
-
-/* 카드 컨테이너 */
-.cards {
-display: flex;
-flex-direction: column;
-gap: var(–gap);
-margin-bottom: 32px;
-}
-
-/* 카드 */
-.card {
-position: relative;
-display: block;
-padding: var(–pad);
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: var(–radius);
-text-decoration: none;
-color: var(–ink);
-overflow: hidden;
-transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-}
-
-.card:active {
-transform: scale(0.985);
-background: var(–card-hi);
-}
-
-@media (hover: hover) {
-.card:hover {
-background: var(–card-hi);
-border-color: var(–border-mid);
-}
-.card:hover .arrow { transform: translateX(3px); }
-.card:hover .stripe { width: 4px; }
-}
-
-/* 왼쪽 컬러 스트라이프 */
-.stripe {
-position: absolute;
-left: 0;
-top: 14%;
-bottom: 14%;
-width: 3px;
-border-radius: 0 var(–radius-xs) var(–radius-xs) 0;
-transition: width 0.2s ease;
-}
-
-.card.c-pos     .stripe { background: var(–pos); }
-.card.c-purple  .stripe { background: var(–purple); }
-.card.c-info    .stripe { background: var(–info); }
-.card.c-accent  .stripe { background: var(–accent); }
-
-.card-top {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 12px;
-}
-
-.card-no {
-font-family: var(–font-mono);
-font-size: 10px;
-font-weight: 600;
-letter-spacing: 0.1em;
-color: var(–ink-dim);
-}
-.card.c-pos     .card-no { color: var(–pos); }
-.card.c-purple  .card-no { color: var(–purple); }
-.card.c-info    .card-no { color: var(–info); }
-.card.c-accent  .card-no { color: var(–accent); }
-
-.arrow {
-font-family: var(–font-mono);
-font-size: 14px;
-font-weight: 500;
-color: var(–ink-dim);
-transition: transform 0.2s ease;
-}
-
-.card-title {
-font-family: var(–font-sans);
-font-size: 16px;
-font-weight: 700;
-letter-spacing: -0.01em;
-color: var(–ink);
-margin-bottom: 4px;
-}
-
-.card-desc {
-font-family: var(–font-sans);
-font-size: 13px;
-font-weight: 400;
-color: var(–ink-mid);
-line-height: 1.5;
-}
-
-.card-tags {
-display: flex;
-gap: 6px;
-margin-top: 12px;
-flex-wrap: wrap;
-}
-
-.tag {
-font-family: var(–font-mono);
-font-size: 10px;
-font-weight: 500;
-letter-spacing: 0.05em;
-color: var(–ink-dim);
-padding: 3px 8px;
-border: 1px solid var(–border);
-border-radius: var(–radius-xs);
-}
-
-/* 푸터 */
-.foot {
-margin-top: auto;
-padding-top: 24px;
-border-top: 1px solid var(–border);
-font-family: var(–font-mono);
-font-size: 10px;
-font-weight: 500;
-letter-spacing: 0.1em;
-color: var(–ink-dim);
-text-align: center;
-text-transform: uppercase;
-}
-
-.foot .ver { color: var(–pos); }
-
-/* 진입 애니메이션 */
-.card { animation: rise 0.45s ease backwards; }
-.card:nth-child(1) { animation-delay: 0.05s; }
-.card:nth-child(2) { animation-delay: 0.13s; }
-.card:nth-child(3) { animation-delay: 0.21s; }
-.card:nth-child(4) { animation-delay: 0.29s; }
-
-@keyframes rise {
-from { opacity: 0; transform: translateY(10px); }
-to   { opacity: 1; transform: translateY(0); }
-}
-
-.head, .title, .section-label, .foot { animation: fadein 0.5s ease backwards; }
-.head          { animation-delay: 0s; }
-.title         { animation-delay: 0.05s; }
-.section-label { animation-delay: 0.15s; }
-.foot          { animation-delay: 0.4s; }
-
-@keyframes fadein {
-from { opacity: 0; }
-to   { opacity: 1; }
-}
+    --bg:        #0a0a09;
+    --surface:   #0f0f0e;
+    --card:      #161513;
+    --card-hi:   #1c1b19;
+    --border:     #2a2926;
+    --border-mid: #353330;
+    --ink:     #f0ede8;
+    --ink-mid: #9a9690;
+    --ink-dim: #565250;
+    --pos:    #00c98a;
+    --neg:    #f04d62;
+    --accent: #e8b800;
+    --info:   #5aabf0;
+    --purple: #b8a8f0;
+    --radius:    14px;
+    --radius-sm:  8px;
+    --radius-xs:  6px;
+    --pad:        16px;
+    --gap:        10px;
+    --max-width:  480px;
+    --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html {
+    background-color: #0a0a09 !important;
+    background: #0a0a09 !important;
+    min-height: 100%;
+  }
+  body {
+    background-color: #0a0a09 !important;
+    background: #0a0a09 !important;
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  @media (prefers-color-scheme: light) {
+    html, body {
+      background-color: #0a0a09 !important;
+      background: #0a0a09 !important;
+      color: #f0ede8 !important;
+    }
+  }
+  .wrap {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 28px var(--pad) 40px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg);
+  }
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .head .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--pos);
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 8px rgba(0, 201, 138, 0.6);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .title {
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 40px;
+  }
+  .title .accent { color: var(--purple); }
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    margin-bottom: 32px;
+  }
+  .card {
+    position: relative;
+    display: block;
+    padding: var(--pad);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--ink);
+    overflow: hidden;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+  .card:active {
+    transform: scale(0.985);
+    background: var(--card-hi);
+  }
+  @media (hover: hover) {
+    .card:hover {
+      background: var(--card-hi);
+      border-color: var(--border-mid);
+    }
+    .card:hover .arrow { transform: translateX(3px); }
+    .card:hover .stripe { width: 4px; }
+  }
+  .stripe {
+    position: absolute;
+    left: 0;
+    top: 14%;
+    bottom: 14%;
+    width: 3px;
+    border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+    transition: width 0.2s ease;
+  }
+  .card.c-pos     .stripe { background: var(--pos); }
+  .card.c-purple  .stripe { background: var(--purple); }
+  .card.c-info    .stripe { background: var(--info); }
+  .card.c-accent  .stripe { background: var(--accent); }
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .card-no {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--ink-dim);
+  }
+  .card.c-pos     .card-no { color: var(--pos); }
+  .card.c-purple  .card-no { color: var(--purple); }
+  .card.c-info    .card-no { color: var(--info); }
+  .card.c-accent  .card-no { color: var(--accent); }
+  .arrow {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-dim);
+    transition: transform 0.2s ease;
+  }
+  .card-title {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .card-desc {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-mid);
+    line-height: 1.5;
+  }
+  .card-tags {
+    display: flex;
+    gap: 6px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--ink-dim);
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xs);
+  }
+  .foot {
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--ink-dim);
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .foot .ver { color: var(--pos); }
+  .card { animation: rise 0.45s ease backwards; }
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.13s; }
+  .card:nth-child(3) { animation-delay: 0.21s; }
+  .card:nth-child(4) { animation-delay: 0.29s; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .head, .title, .section-label, .foot { animation: fadein 0.5s ease backwards; }
+  .head          { animation-delay: 0s; }
+  .title         { animation-delay: 0.05s; }
+  .section-label { animation-delay: 0.15s; }
+  .foot          { animation-delay: 0.4s; }
+  @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
 </style>
-
 </head>
 <body>
   <div class="wrap">
-
-```
-<!-- 시스템 헤더 -->
-<div class="head">
-  <span><span class="dot"></span>SYSTEM ONLINE</span>
-  <span id="now">--:--</span>
-</div>
-
-<!-- 타이틀 -->
-<h1 class="title">
-  LIFE🌿<br>
-  <span class="accent">DASHBOARD</span>
-</h1>
-
-<!-- 모듈 섹션 -->
-<div class="section-label">MODULES</div>
-
-<div class="cards">
-
-  <!-- 01. 총자산 연수익률 -->
-  <a class="card c-pos" href="https://emilyjeong.github.io/total_asset/">
-    <span class="stripe"></span>
-    <div class="card-top">
-      <span class="card-no">01 / RETURNS</span>
-      <span class="arrow">→</span>
+    <div class="head">
+      <span><span class="dot"></span>SYSTEM ONLINE</span>
+      <span id="now">--:--</span>
     </div>
-    <div class="card-title">총자산 연수익률</div>
-    <div class="card-desc">계좌별 단순수익률 · 연도별 추이</div>
-    <div class="card-tags">
-      <span class="tag">YTD</span>
-      <span class="tag">ANNUAL</span>
-      <span class="tag">INPUT</span>
+    <h1 class="title">
+      LIFE🌿<br>
+      <span class="accent">DASHBOARD</span>
+    </h1>
+    <div class="section-label">MODULES</div>
+    <div class="cards">
+      <a class="card c-pos" href="https://emilyjeong.github.io/total_asset/">
+        <span class="stripe"></span>
+        <div class="card-top">
+          <span class="card-no">01 / RETURNS</span>
+          <span class="arrow">→</span>
+        </div>
+        <div class="card-title">총자산 연수익률</div>
+        <div class="card-desc">계좌별 단순수익률 · 연도별 추이</div>
+        <div class="card-tags">
+          <span class="tag">YTD</span>
+          <span class="tag">ANNUAL</span>
+          <span class="tag">INPUT</span>
+        </div>
+      </a>
+      <a class="card c-purple" href="https://emilyjeong.github.io/family_portfolio/">
+        <span class="stripe"></span>
+        <div class="card-top">
+          <span class="card-no">02 / COUPLE</span>
+          <span class="arrow">→</span>
+        </div>
+        <div class="card-title">부부 합산 자산</div>
+        <div class="card-desc">합산 · 아내 · 남편 포트폴리오</div>
+        <div class="card-tags">
+          <span class="tag">PORTFOLIO</span>
+          <span class="tag">ALLOCATION</span>
+        </div>
+      </a>
+      <a class="card c-info" href="https://emilyjeong.github.io/market/">
+        <span class="stripe"></span>
+        <div class="card-top">
+          <span class="card-no">03 / MACRO</span>
+          <span class="arrow">→</span>
+        </div>
+        <div class="card-title">시장 지표</div>
+        <div class="card-desc">FED 유동성 · VIX · 주가 & 시장</div>
+        <div class="card-tags">
+          <span class="tag">LIQUIDITY</span>
+          <span class="tag">VIX</span>
+          <span class="tag">MARKET</span>
+        </div>
+      </a>
+      <a class="card c-accent" href="https://emilyjeong.github.io/book/">
+        <span class="stripe"></span>
+        <div class="card-top">
+          <span class="card-no">04 / BOOKS</span>
+          <span class="arrow">→</span>
+        </div>
+        <div class="card-title">독서 아카이브</div>
+        <div class="card-desc">읽은 책 · 메모 · 인사이트 기록</div>
+        <div class="card-tags">
+          <span class="tag">READING</span>
+          <span class="tag">NOTES</span>
+          <span class="tag">ARCHIVE</span>
+        </div>
+      </a>
     </div>
-  </a>
-
-  <!-- 02. 부부 자산 -->
-  <a class="card c-purple" href="https://emilyjeong.github.io/family_portfolio/">
-    <span class="stripe"></span>
-    <div class="card-top">
-      <span class="card-no">02 / COUPLE</span>
-      <span class="arrow">→</span>
+    <div class="foot">
+      BUILD <span class="ver">2026.05</span> · SINGLE SOURCE OF TRUTH
     </div>
-    <div class="card-title">부부 합산 자산</div>
-    <div class="card-desc">합산 · 아내 · 남편 포트폴리오</div>
-    <div class="card-tags">
-      <span class="tag">PORTFOLIO</span>
-      <span class="tag">ALLOCATION</span>
-    </div>
-  </a>
-
-  <!-- 03. MACRO SIGNAL -->
-  <a class="card c-info" href="https://emilyjeong.github.io/market/">
-    <span class="stripe"></span>
-    <div class="card-top">
-      <span class="card-no">03 / MACRO</span>
-      <span class="arrow">→</span>
-    </div>
-    <div class="card-title">MACRO SIGNAL</div>
-    <div class="card-desc">FED 유동성 · VIX · 주가 & 시장</div>
-    <div class="card-tags">
-      <span class="tag">LIQUIDITY</span>
-      <span class="tag">VIX</span>
-      <span class="tag">MARKET</span>
-    </div>
-  </a>
-
-  <!-- 04. 독서 아카이브 -->
-  <a class="card c-accent" href="https://emilyjeong.github.io/book/">
-    <span class="stripe"></span>
-    <div class="card-top">
-      <span class="card-no">04 / BOOKS</span>
-      <span class="arrow">→</span>
-    </div>
-    <div class="card-title">독서 아카이브</div>
-    <div class="card-desc">읽은 책 · 메모 · 인사이트 기록</div>
-    <div class="card-tags">
-      <span class="tag">READING</span>
-      <span class="tag">NOTES</span>
-      <span class="tag">ARCHIVE</span>
-    </div>
-  </a>
-
-</div>
-
-<!-- 푸터 -->
-<div class="foot">
-  BUILD <span class="ver">2026.05</span> · SINGLE SOURCE OF TRUTH
-</div>
-```
-
   </div>
-
 <script>
   function updateTime() {
     const d = new Date();
@@ -411,6 +333,5 @@ to   { opacity: 1; }
   updateTime();
   setInterval(updateTime, 30000);
 </script>
-
 </body>
 </html>
