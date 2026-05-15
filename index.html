@@ -28,6 +28,7 @@
     --accent: #e8b800;
     --info:   #5aabf0;
     --purple: #b8a8f0;
+    --btc:    #f07a40;
     --radius:    14px;
     --radius-sm:  8px;
     --radius-xs:  6px;
@@ -164,6 +165,8 @@
   .card.c-purple  .stripe { background: var(--purple); }
   .card.c-info    .stripe { background: var(--info); }
   .card.c-accent  .stripe { background: var(--accent); }
+  .card.c-neg     .stripe { background: var(--neg); }
+  .card.c-btc     .stripe { background: var(--btc); }
   .card-top {
     display: flex;
     justify-content: space-between;
@@ -181,6 +184,8 @@
   .card.c-purple  .card-no { color: var(--purple); }
   .card.c-info    .card-no { color: var(--info); }
   .card.c-accent  .card-no { color: var(--accent); }
+  .card.c-neg     .card-no { color: var(--neg); }
+  .card.c-btc     .card-no { color: var(--btc); }
   .arrow {
     font-family: var(--font-mono);
     font-size: 14px;
@@ -237,6 +242,8 @@
   .card:nth-child(2) { animation-delay: 0.13s; }
   .card:nth-child(3) { animation-delay: 0.21s; }
   .card:nth-child(4) { animation-delay: 0.29s; }
+  .card:nth-child(5) { animation-delay: 0.37s; }
+  .card:nth-child(6) { animation-delay: 0.45s; }
   @keyframes rise {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -245,7 +252,7 @@
   .head          { animation-delay: 0s; }
   .title         { animation-delay: 0.05s; }
   .section-label { animation-delay: 0.15s; }
-  .foot          { animation-delay: 0.4s; }
+  .foot          { animation-delay: 0.55s; }
   @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
@@ -312,11 +319,39 @@
           <span class="arrow">→</span>
         </div>
         <div class="card-title">부동산 지도</div>
-        <div class="card-desc">관심 지역 · 정보</div>
+        <div class="card-desc">관심 지역 · 매물 · 시세 추적</div>
         <div class="card-tags">
           <span class="tag">MAP</span>
           <span class="tag">PROPERTY</span>
           <span class="tag">MARKET</span>
+        </div>
+      </a>
+      <a class="card c-neg" href="https://emilyjeong.github.io/target/">
+        <span class="stripe"></span>
+        <div class="card-top">
+          <span class="card-no">05 / TARGET</span>
+          <span class="arrow">→</span>
+        </div>
+        <div class="card-title">목표</div>
+        <div class="card-desc">투자·라이프 타겟 · 달성 추적</div>
+        <div class="card-tags">
+          <span class="tag">GOAL</span>
+          <span class="tag">OKR</span>
+          <span class="tag">PROGRESS</span>
+        </div>
+      </a>
+      <a class="card c-btc" href="https://emilyjeong.github.io/btc/">
+        <span class="stripe"></span>
+        <div class="card-top">
+          <span class="card-no">06 / BTC</span>
+          <span class="arrow">→</span>
+        </div>
+        <div class="card-title">비트코인</div>
+        <div class="card-desc">BTC 보유 · 평단 · 손익 추적</div>
+        <div class="card-tags">
+          <span class="tag">CRYPTO</span>
+          <span class="tag">WALLET</span>
+          <span class="tag">P&L</span>
         </div>
       </a>
     </div>
