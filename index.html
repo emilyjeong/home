@@ -29,6 +29,7 @@
     --info:   #5aabf0;
     --purple: #b8a8f0;
     --btc:    #f07a40;
+    --teal:   #2dd4bf;
     --radius:    14px;
     --radius-sm:  8px;
     --radius-xs:  6px;
@@ -167,6 +168,7 @@
   .card.c-accent  .stripe { background: var(--accent); }
   .card.c-neg     .stripe { background: var(--neg); }
   .card.c-btc     .stripe { background: var(--btc); }
+  .card.c-teal    .stripe { background: var(--teal); }
   .card-top {
     display: flex;
     justify-content: space-between;
@@ -186,6 +188,7 @@
   .card.c-accent  .card-no { color: var(--accent); }
   .card.c-neg     .card-no { color: var(--neg); }
   .card.c-btc     .card-no { color: var(--btc); }
+  .card.c-teal    .card-no { color: var(--teal); }
   .arrow {
     font-family: var(--font-mono);
     font-size: 14px;
@@ -244,6 +247,7 @@
   .card:nth-child(4) { animation-delay: 0.29s; }
   .card:nth-child(5) { animation-delay: 0.37s; }
   .card:nth-child(6) { animation-delay: 0.45s; }
+  .card:nth-child(7) { animation-delay: 0.53s; }
   @keyframes rise {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -252,7 +256,7 @@
   .head          { animation-delay: 0s; }
   .title         { animation-delay: 0.05s; }
   .section-label { animation-delay: 0.15s; }
-  .foot          { animation-delay: 0.55s; }
+  .foot          { animation-delay: 0.63s; }
   @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
@@ -319,7 +323,7 @@
           <span class="arrow">→</span>
         </div>
         <div class="card-title">부동산 지도</div>
-        <div class="card-desc">관심 지역 · 추적</div>
+        <div class="card-desc">관심 지역 · 매물 · 시세 추적</div>
         <div class="card-tags">
           <span class="tag">MAP</span>
           <span class="tag">PROPERTY</span>
@@ -333,7 +337,7 @@
           <span class="arrow">→</span>
         </div>
         <div class="card-title">목표</div>
-        <div class="card-desc">주식 모으기 목표</div>
+        <div class="card-desc">투자·라이프 타겟 · 달성 추적</div>
         <div class="card-tags">
           <span class="tag">GOAL</span>
           <span class="tag">OKR</span>
@@ -347,11 +351,25 @@
           <span class="arrow">→</span>
         </div>
         <div class="card-title">비트코인</div>
-        <div class="card-desc">BTC 보유 · 목표</div>
+        <div class="card-desc">BTC 보유 · 평단 · 손익 추적</div>
         <div class="card-tags">
           <span class="tag">CRYPTO</span>
           <span class="tag">WALLET</span>
           <span class="tag">P&L</span>
+        </div>
+      </a>
+      <a class="card c-teal" href="https://emilyjeong.github.io/whooing/">
+        <span class="stripe"></span>
+        <div class="card-top">
+          <span class="card-no">07 / WHOOING</span>
+          <span class="arrow">→</span>
+        </div>
+        <div class="card-title">가계부</div>
+        <div class="card-desc">수입 · 지출 · 카테고리 분석</div>
+        <div class="card-tags">
+          <span class="tag">BUDGET</span>
+          <span class="tag">EXPENSE</span>
+          <span class="tag">INCOME</span>
         </div>
       </a>
     </div>
