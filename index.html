@@ -4,14 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <!-- 다크 강제 적용 -->
   <meta name="color-scheme" content="dark">
   <meta name="supported-color-schemes" content="dark">
   <meta name="theme-color" content="#0a0a09">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <!-- 캐시 무효화 -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -77,7 +75,6 @@
     }
     .container { max-width: var(--max-width); margin: 0 auto; }
 
-    /* HEADER */
     .ph-head {
       display: flex; justify-content: space-between; align-items: center;
       padding: 0 4px 14px;
@@ -91,7 +88,6 @@
     .ph-title .emoji { font-size: 22px; }
     .ph-time { font-family: var(--font-mono); font-size: 11px; color: var(--ink-dim); }
 
-    /* SECTION LABEL */
     .sec-label {
       font-size: 9.5px; font-weight: 700; color: var(--ink-dim);
       text-transform: uppercase; letter-spacing: 0.1em;
@@ -100,7 +96,6 @@
     }
     .sec-label .count { color: var(--ink-mid); font-family: var(--font-mono); }
 
-    /* WIDGET BASE */
     .w {
       background: var(--card);
       border: 1px solid var(--border);
@@ -121,7 +116,6 @@
       text-transform: uppercase; letter-spacing: 0.06em;
     }
 
-    /* W1: 순자산 */
     .w1-amt {
       font-family: var(--font-mono); font-size: 24px; font-weight: 700;
       letter-spacing: -0.02em; color: var(--ink); margin-bottom: 10px;
@@ -136,7 +130,6 @@
     .w1-row .v.pos { color: var(--pos); }
     .w1-row .v.neg { color: var(--neg); }
 
-    /* W2: 가계부 */
     .w4-summary {
       display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;
       margin-bottom: 14px;
@@ -178,7 +171,6 @@
     .w4-bar .fill.pos { background: var(--pos); }
     .w4-bar .fill.neg { background: var(--neg); }
 
-    /* W3: 부부 주식 합산 */
     .w2 {
       display: grid; grid-template-columns: 1fr 86px;
       gap: 14px; align-items: center;
@@ -223,7 +215,6 @@
       text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1px;
     }
 
-    /* W4: 주식 수량 목표 */
     .w3 .row {
       display: grid; grid-template-columns: 36px 1fr 60px;
       align-items: center; gap: 8px;
@@ -241,7 +232,6 @@
     }
     .w3 .row .cnt .done { color: var(--pos); }
 
-    /* W5: 연금 */
     .w-pension-top { margin-bottom: 12px; }
     .w-pension-amt {
       font-family: var(--font-mono); font-size: 20px; font-weight: 700;
@@ -280,7 +270,6 @@
       color: var(--ink-mid); text-align: right;
     }
 
-    /* W6: BTC */
     .w5 { display: flex; align-items: center; gap: 12px; }
     .w5-ring { position: relative; width: 56px; height: 56px; flex-shrink: 0; }
     .w5-ring svg { transform: rotate(-90deg); }
@@ -300,7 +289,6 @@
       font-family: var(--font-mono); margin-top: 4px;
     }
 
-    /* LAUNCHER */
     .launcher {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 8px; margin-top: 10px;
@@ -348,21 +336,21 @@
       <span class="count">6 widgets</span>
     </div>
 
-    <!-- W1: 순자산 -->
+    <!-- W1: 순자산 (로딩 placeholder) -->
     <div class="w">
       <div class="w-head">
         <span class="w-title">순자산</span>
-        <span class="w-tag" id="w-totalAsset-tag">26.04 · Monthly</span>
+        <span class="w-tag" id="w-totalAsset-tag" style="color: var(--ink-dim);">···</span>
       </div>
-      <div class="w1-amt" id="w-totalAsset-amt">₩ 123,456,789</div>
+      <div class="w1-amt" id="w-totalAsset-amt" style="color: var(--ink-dim);">···</div>
       <div class="w1-rows">
         <div class="w1-row">
           <span class="k">지난달 대비</span>
-          <span id="w-totalAsset-monthly"><span class="v pos">+0.6천 (+4.9%)</span></span>
+          <span id="w-totalAsset-monthly"><span class="v" style="color: var(--ink-dim);">···</span></span>
         </div>
         <div class="w1-row">
           <span class="k">올해 누적</span>
-          <span id="w-totalAsset-ytd"><span class="v pos">+0.6억 (+5.0%)</span></span>
+          <span id="w-totalAsset-ytd"><span class="v" style="color: var(--ink-dim);">···</span></span>
         </div>
       </div>
     </div>
@@ -486,7 +474,6 @@
       </div>
     </div>
 
-    <!-- LAUNCHER -->
     <div class="sec-label" style="margin-top: 22px;">
       <span>모듈</span>
       <span class="count">7 apps</span>
@@ -505,7 +492,6 @@
   </div>
 
   <script>
-    // ─────────────── 헤더 시각 ───────────────
     (function () {
       const el = document.getElementById('ph-time');
       if (!el) return;
@@ -520,7 +506,6 @@
       setTimeout(() => { render(); setInterval(render, 60 * 1000); }, ms);
     })();
 
-    // ─────────────── 단위 변환 함수 ───────────────
     function formatDeltaUnit(amount) {
       const abs = Math.abs(amount);
       const sign = amount >= 0 ? '+' : '-';
@@ -544,30 +529,31 @@
       const el = document.getElementById(id);
       if (el) el.innerHTML = html;
     }
+    function clearLoadingStyle(id) {
+      const el = document.getElementById(id);
+      if (el) el.style.color = '';
+    }
 
-    // ─────────────── W1: 순자산 렌더 ───────────────
     function renderTotalAsset(data) {
       const years = data.years || [];
       if (years.length === 0) return;
       const current = years[0];
-      const previous = years[1]; // 작년 말
+      const previous = years[1];
       const snaps = data.monthlySnapshots || [];
 
-      // 메인 금액 (정확한 순자산 = summary.ttl)
       const ttl = current.summary && current.summary.ttl;
       if (ttl) {
         setText('w-totalAsset-amt', '₩ ' + Math.round(ttl).toLocaleString('ko-KR'));
+        clearLoadingStyle('w-totalAsset-amt');
       }
 
-      // 태그 — 평가일에서 YY.MM 추출
       const evalDate = current.evalDate || '';
       if (evalDate) {
         const [y, m] = evalDate.split('-');
         setText('w-totalAsset-tag', `${y.slice(2)}.${m} · Monthly`);
+        clearLoadingStyle('w-totalAsset-tag');
       }
 
-      // 지난달 대비 — monthlySnapshots 마지막 2개의 rawTtl 변동률
-      // (메인 금액에 그 변동률 적용해서 추정 변동 금액 표시)
       if (snaps.length >= 2 && ttl) {
         const last = snaps[snaps.length - 1];
         const prev = snaps[snaps.length - 2];
@@ -578,7 +564,6 @@
         }
       }
 
-      // 올해 누적 — summary.ttl 직접 비교 (정확)
       if (previous && previous.summary && previous.summary.ttl && ttl) {
         const prevTtl = previous.summary.ttl;
         const deltaAmt = ttl - prevTtl;
@@ -587,12 +572,10 @@
       }
     }
 
-    // ─────────────── 데이터 fetch + 갱신 ───────────────
     async function loadAndRender() {
       const cfg = window.HOME_CONFIG;
       if (!cfg || !cfg.ENDPOINTS) return;
 
-      // 1. 순자산
       if (cfg.ENDPOINTS.totalAsset) {
         try {
           const res = await fetch(cfg.ENDPOINTS.totalAsset);
@@ -602,13 +585,6 @@
           console.error('순자산 fetch 실패:', err);
         }
       }
-
-      // 다른 위젯 endpoint는 비어있으면 자동 스킵
-      // 채워지면 여기에 추가:
-      //   if (cfg.ENDPOINTS.familyPortfolio) { ... }
-      //   if (cfg.ENDPOINTS.target) { ... }
-      //   if (cfg.ENDPOINTS.cashflow) { ... }
-      //   if (cfg.ENDPOINTS.btc) { ... }
     }
 
     document.addEventListener('DOMContentLoaded', loadAndRender);
