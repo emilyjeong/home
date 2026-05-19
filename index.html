@@ -1,391 +1,824 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#0a0a09">
-<meta name="color-scheme" content="dark">
-<title>LIFE🌿 ダッシュボード</title>
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    color-scheme: dark only;
-    --bg:        #0a0a09;
-    --surface:   #0f0f0e;
-    --card:      #161513;
-    --card-hi:   #1c1b19;
-    --border:     #2a2926;
-    --border-mid: #353330;
-    --ink:     #f0ede8;
-    --ink-mid: #9a9690;
-    --ink-dim: #565250;
-    --pos:    #00c98a;
-    --neg:    #f04d62;
-    --accent: #e8b800;
-    --info:   #5aabf0;
-    --purple: #b8a8f0;
-    --btc:    #f07a40;
-    --teal:   #2dd4bf;
-    --radius:    14px;
-    --radius-sm:  8px;
-    --radius-xs:  6px;
-    --pad:        16px;
-    --gap:        10px;
-    --max-width:  480px;
-    --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  html {
-    background-color: #0a0a09 !important;
-    background: #0a0a09 !important;
-    min-height: 100%;
-  }
-  body {
-    background-color: #0a0a09 !important;
-    background: #0a0a09 !important;
-    color: var(--ink);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  @media (prefers-color-scheme: light) {
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <!-- 다크 강제 적용 (iOS Safari가 light로 우회하지 못하게) -->
+
+  <meta name="color-scheme" content="dark">
+  <meta name="supported-color-schemes" content="dark">
+  <meta name="theme-color" content="#0a0a09">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- 캐시 무효화 (GitHub Pages / 모바일 브라우저) -->
+
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <title>Overview · 인생 자동화</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: dark;
+
+      /* 배경 레이어 */
+      --bg: #0a0a09;
+      --surface: #0f0f0e;
+      --card: #161513;
+      --card-hi: #1c1b19;
+
+      /* 테두리 */
+      --border: #2a2926;
+      --border-mid: #353330;
+
+      /* 텍스트 */
+      --ink: #f0ede8;
+      --ink-mid: #9a9690;
+      --ink-dim: #565250;
+
+      /* 의미색 */
+      --pos: #00c98a;
+      --neg: #f04d62;
+      --accent: #e8b800;
+      --info: #5aabf0;
+      --purple: #b8a8f0;
+
+      /* 자산 카테고리 */
+      --cat-stock: #00c98a;
+      --cat-realty: #5aabf0;
+      --cat-pension: #e8b800;
+      --cat-btc: #f07a40;
+      --cat-retire: #b8a8f0;
+
+      /* 레이아웃 */
+      --radius: 14px;
+      --radius-sm: 8px;
+      --radius-xs: 6px;
+      --pad: 16px;
+      --gap: 10px;
+      --max-width: 480px;
+
+      /* 폰트 */
+      --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     html, body {
       background-color: #0a0a09 !important;
-      background: #0a0a09 !important;
-      color: #f0ede8 !important;
+      color: var(--ink);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-  }
-  .wrap {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 28px var(--pad) 40px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--bg);
-  }
-  .head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: var(--ink-dim);
-    text-transform: uppercase;
-    margin-bottom: 28px;
-  }
-  .head .dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    background: var(--pos);
-    border-radius: 50%;
-    margin-right: 8px;
-    box-shadow: 0 0 8px rgba(0, 201, 138, 0.6);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-  .title {
-    font-size: 38px;
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    color: var(--ink);
-    margin-bottom: 40px;
-  }
-  .title .accent { color: var(--purple); }
-  .section-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    color: var(--ink-dim);
-    text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-  .cards {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap);
-    margin-bottom: 32px;
-  }
-  .card {
-    position: relative;
-    display: block;
-    padding: var(--pad);
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    text-decoration: none;
-    color: var(--ink);
-    overflow: hidden;
-    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-  }
-  .card:active {
-    transform: scale(0.985);
-    background: var(--card-hi);
-  }
-  @media (hover: hover) {
-    .card:hover {
+
+    /* iOS overscroll bounce 영역도 검은색 */
+    html {
+      background-color: #0a0a09 !important;
+      overscroll-behavior: none;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: max(18px, env(safe-area-inset-top)) 14px max(28px, env(safe-area-inset-bottom));
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    /* ─────────────── HEADER ─────────────── */
+    .ph-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 4px 14px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+    .ph-title {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ph-title .emoji { font-size: 22px; }
+    .ph-time {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-dim);
+    }
+
+    /* ─────────────── SECTION LABEL ─────────────── */
+    .sec-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 4px 4px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .sec-label .count {
+      color: var(--ink-mid);
+      font-family: var(--font-mono);
+    }
+
+    /* ─────────────── WIDGET BASE ─────────────── */
+    .w {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 13px 14px;
+      margin-bottom: 8px;
+    }
+    .w-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+    .w-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .w-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─────────────── W1: 순자산 ─────────────── */
+    .w1-amt {
+      font-family: var(--font-mono);
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .w1-rows { display: flex; flex-direction: column; gap: 4px; }
+    .w1-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 11px;
+    }
+    .w1-row .k { color: var(--ink-dim); font-family: var(--font-sans); }
+    .w1-row .v { font-family: var(--font-mono); font-weight: 600; }
+    .w1-row .v.pos { color: var(--pos); }
+    .w1-row .v.neg { color: var(--neg); }
+
+    /* ─────────────── W2: 가계부 ─────────────── */
+    .w4-summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .w4-col { text-align: center; padding: 6px 2px; }
+    .w4-col .lbl {
+      font-size: 9.5px;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .w4-col .v {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+    }
+    .w4-col.income .v { color: var(--info); }
+    .w4-col.spend  .v { color: var(--purple); }
+    .w4-col.rate   .v.pos { color: var(--pos); }
+    .w4-col.rate   .v.neg { color: var(--neg); }
+
+    .w4-divider { height: 1px; background: var(--border); margin: 4px 0 12px; }
+    .w4-save-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .w4-save-label .k {
+      font-size: 10px;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+    .w4-save-label .v {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-mid);
+      font-weight: 600;
+    }
+    .w4-save-label .v .amt { font-weight: 700; }
+    .w4-save-label .v .amt.pos { color: var(--pos); }
+    .w4-save-label .v .amt.neg { color: var(--neg); }
+
+    .w4-bar {
+      width: 100%;
+      height: 5px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .w4-bar .fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.8s ease;
+    }
+    .w4-bar .fill.pos { background: var(--pos); }
+    .w4-bar .fill.neg { background: var(--neg); }
+
+    /* ─────────────── W3: 부부 주식 합산 ─────────────── */
+    .w2 {
+      display: grid;
+      grid-template-columns: 1fr 86px;
+      gap: 14px;
+      align-items: center;
+    }
+    .w2-left .amt {
+      font-family: var(--font-mono);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+    .w2-left .ret {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      margin-top: 2px;
+      color: var(--ink);
+    }
+    .w2-left .ret .delta { font-weight: 700; }
+    .w2-left .ret .delta.pos { color: var(--pos); }
+    .w2-left .ret .delta.neg { color: var(--neg); }
+    .w2-left .ret .pct.pos { color: var(--pos); }
+    .w2-left .ret .pct.neg { color: var(--neg); }
+
+    .w2-left .stk {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .w2-left .stk .row {
+      display: flex;
+      align-items: center;
+      font-size: 10px;
+      gap: 6px;
+    }
+    .w2-left .stk .d {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .w2-left .stk .nm {
+      font-family: var(--font-mono);
+      color: var(--ink-mid);
+      font-weight: 600;
+      width: 38px;
+    }
+    .w2-left .stk .pc {
+      font-family: var(--font-mono);
+      color: var(--ink-dim);
+      margin-left: auto;
+      font-size: 9.5px;
+    }
+
+    .donut {
+      width: 86px;
+      height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .donut svg { transform: rotate(-90deg); }
+    .donut-c { position: absolute; text-align: center; }
+    .donut-c .v {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .donut-c .l {
+      font-size: 8px;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 1px;
+    }
+
+    /* ─────────────── W4: 주식 수량 목표 ─────────────── */
+    .w3 .row {
+      display: grid;
+      grid-template-columns: 36px 1fr 60px;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+      font-size: 11px;
+    }
+    .w3 .row .tk {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 10px;
+    }
+    .w3 .row .bar {
+      background: var(--border);
+      height: 4px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .w3 .row .fill { height: 100%; }
+    .w3 .row .cnt {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--ink-mid);
+      text-align: right;
+    }
+    .w3 .row .cnt .done { color: var(--pos); }
+
+    /* ─────────────── W5: 연금 ─────────────── */
+    .w-pension-top { margin-bottom: 12px; }
+    .w-pension-amt {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .w-pension-ret {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .w-pension-ret .delta { font-weight: 700; }
+    .w-pension-ret .delta.pos { color: var(--pos); }
+    .w-pension-ret .delta.neg { color: var(--neg); }
+    .w-pension-ret .pct.pos { color: var(--pos); }
+    .w-pension-ret .pct.neg { color: var(--neg); }
+
+    .w-pension-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 10px 0;
+    }
+    .w-pension-label {
+      font-size: 9px;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .w-pension-sectors {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .w-pension-row {
+      display: grid;
+      grid-template-columns: 60px 1fr 40px;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+    }
+    .w-pension-row .nm {
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: var(--ink-mid);
+      font-size: 10.5px;
+    }
+    .w-pension-row .bar {
+      background: var(--border);
+      height: 4px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .w-pension-row .fill { height: 100%; border-radius: 2px; }
+    .w-pension-row .pct {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--ink-mid);
+      text-align: right;
+    }
+
+    /* ─────────────── W6: BTC 목표 ─────────────── */
+    .w5 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .w5-ring {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+    }
+    .w5-ring svg { transform: rotate(-90deg); }
+    .w5-ring .c {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--cat-btc);
+    }
+    .w5-body { flex: 1; }
+    .w5-body .amt {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .w5-body .goal {
+      font-size: 10px;
+      color: var(--ink-mid);
+      font-family: var(--font-mono);
+      margin-top: 4px;
+    }
+
+    /* ─────────────── LAUNCHER ─────────────── */
+    .launcher {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .app {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .app:hover,
+    .app:focus-visible {
       background: var(--card-hi);
       border-color: var(--border-mid);
     }
-    .card:hover .arrow { transform: translateX(3px); }
-    .card:hover .stripe { width: 4px; }
-  }
-  .stripe {
-    position: absolute;
-    left: 0;
-    top: 14%;
-    bottom: 14%;
-    width: 3px;
-    border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
-    transition: width 0.2s ease;
-  }
-  .card.c-pos     .stripe { background: var(--pos); }
-  .card.c-purple  .stripe { background: var(--purple); }
-  .card.c-info    .stripe { background: var(--info); }
-  .card.c-accent  .stripe { background: var(--accent); }
-  .card.c-neg     .stripe { background: var(--neg); }
-  .card.c-btc     .stripe { background: var(--btc); }
-  .card.c-teal    .stripe { background: var(--teal); }
-  .card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-  }
-  .card-no {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    color: var(--ink-dim);
-  }
-  .card.c-pos     .card-no { color: var(--pos); }
-  .card.c-purple  .card-no { color: var(--purple); }
-  .card.c-info    .card-no { color: var(--info); }
-  .card.c-accent  .card-no { color: var(--accent); }
-  .card.c-neg     .card-no { color: var(--neg); }
-  .card.c-btc     .card-no { color: var(--btc); }
-  .card.c-teal    .card-no { color: var(--teal); }
-  .arrow {
-    font-family: var(--font-mono);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--ink-dim);
-    transition: transform 0.2s ease;
-  }
-  .card-title {
-    font-family: var(--font-sans);
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 4px;
-  }
-  .card-desc {
-    font-family: var(--font-sans);
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--ink-mid);
-    line-height: 1.5;
-  }
-  .card-tags {
-    display: flex;
-    gap: 6px;
-    margin-top: 12px;
-    flex-wrap: wrap;
-  }
-  .tag {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    color: var(--ink-dim);
-    padding: 3px 8px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xs);
-  }
-  .foot {
-    margin-top: auto;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    color: var(--ink-dim);
-    text-align: center;
-    text-transform: uppercase;
-  }
-  .foot .ver { color: var(--pos); }
-  .card { animation: rise 0.45s ease backwards; }
-  .card:nth-child(1) { animation-delay: 0.05s; }
-  .card:nth-child(2) { animation-delay: 0.13s; }
-  .card:nth-child(3) { animation-delay: 0.21s; }
-  .card:nth-child(4) { animation-delay: 0.29s; }
-  .card:nth-child(5) { animation-delay: 0.37s; }
-  .card:nth-child(6) { animation-delay: 0.45s; }
-  .card:nth-child(7) { animation-delay: 0.53s; }
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .head, .title, .section-label, .foot { animation: fadein 0.5s ease backwards; }
-  .head          { animation-delay: 0s; }
-  .title         { animation-delay: 0.05s; }
-  .section-label { animation-delay: 0.15s; }
-  .foot          { animation-delay: 0.63s; }
-  @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-</style>
+    .app:active { transform: scale(0.98); }
+    .app-ic {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .app-lbl {
+      font-size: 12px;
+      color: var(--ink);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+    .app.add {
+      background: var(--card-hi);
+      border-style: dashed;
+      border-color: var(--border-mid);
+      cursor: default;
+    }
+    .app.add:hover { background: var(--card-hi); }
+    .app.add .app-ic {
+      background: transparent;
+      color: var(--ink-dim);
+      font-size: 18px;
+    }
+    .app.add .app-lbl { color: var(--ink-dim); }
+  </style>
+
 </head>
 <body>
-  <div class="wrap">
-    <div class="head">
-      <span><span class="dot"></span>SYSTEM ONLINE</span>
-      <span id="now">--:--</span>
+  <div class="container">
+
+```
+<!-- ─────────────── HEADER ─────────────── -->
+<div class="ph-head">
+  <span class="ph-title">
+    <span>Overview</span>
+    <span class="emoji">👀</span>
+  </span>
+  <span class="ph-time" id="ph-time">—</span>
+</div>
+
+<!-- ─────────────── DASHBOARD ─────────────── -->
+<div class="sec-label">
+  <span>dashboard</span>
+  <span class="count">6 widgets</span>
+</div>
+
+<!-- W1: 순자산 -->
+<div class="w">
+  <div class="w-head">
+    <span class="w-title">순자산</span>
+    <span class="w-tag">26.04 · Monthly</span>
+  </div>
+  <div class="w1-amt">₩ 123,456,789</div>
+  <div class="w1-rows">
+    <div class="w1-row">
+      <span class="k">지난달 대비</span>
+      <span class="v pos">+0.6천 (+4.9%)</span>
     </div>
-    <h1 class="title">
-      LIFE🌿<br>
-      <span class="accent">ダッシュボード</span>
-    </h1>
-    <div class="section-label">MODULES</div>
-    <div class="cards">
-      <a class="card c-pos" href="https://emilyjeong.github.io/total_asset/">
-        <span class="stripe"></span>
-        <div class="card-top">
-          <span class="card-no">01 / RETURNS</span>
-          <span class="arrow">→</span>
-        </div>
-        <div class="card-title">총자산 연수익률</div>
-        <div class="card-desc">계좌별 단순수익률 · 연도별 추이</div>
-        <div class="card-tags">
-          <span class="tag">YTD</span>
-          <span class="tag">ANNUAL</span>
-          <span class="tag">INPUT</span>
-        </div>
-      </a>
-      <a class="card c-purple" href="https://emilyjeong.github.io/family_portfolio/">
-        <span class="stripe"></span>
-        <div class="card-top">
-          <span class="card-no">02 / COUPLE</span>
-          <span class="arrow">→</span>
-        </div>
-        <div class="card-title">부부 합산 주식</div>
-        <div class="card-desc">합산 · 아내 · 남편 포트폴리오</div>
-        <div class="card-tags">
-          <span class="tag">PORTFOLIO</span>
-          <span class="tag">ALLOCATION</span>
-        </div>
-      </a>
-      <a class="card c-info" href="https://emilyjeong.github.io/market/">
-        <span class="stripe"></span>
-        <div class="card-top">
-          <span class="card-no">03 / MACRO</span>
-          <span class="arrow">→</span>
-        </div>
-        <div class="card-title">시장 지표</div>
-        <div class="card-desc">FED 유동성 · VIX · 주가 & 시장</div>
-        <div class="card-tags">
-          <span class="tag">LIQUIDITY</span>
-          <span class="tag">VIX</span>
-          <span class="tag">MARKET</span>
-        </div>
-      </a>
-      <a class="card c-accent" href="https://emilyjeong.github.io/realestate/">
-        <span class="stripe"></span>
-        <div class="card-top">
-          <span class="card-no">04 / REALESTATE</span>
-          <span class="arrow">→</span>
-        </div>
-        <div class="card-title">부동산 지도</div>
-        <div class="card-desc">관심 지역 · 매물 · 시세 추적</div>
-        <div class="card-tags">
-          <span class="tag">MAP</span>
-          <span class="tag">PROPERTY</span>
-          <span class="tag">MARKET</span>
-        </div>
-      </a>
-      <a class="card c-neg" href="https://emilyjeong.github.io/target/">
-        <span class="stripe"></span>
-        <div class="card-top">
-          <span class="card-no">05 / TARGET</span>
-          <span class="arrow">→</span>
-        </div>
-        <div class="card-title">목표</div>
-        <div class="card-desc">투자·라이프 타겟 · 달성 추적</div>
-        <div class="card-tags">
-          <span class="tag">GOAL</span>
-          <span class="tag">OKR</span>
-          <span class="tag">PROGRESS</span>
-        </div>
-      </a>
-      <a class="card c-btc" href="https://emilyjeong.github.io/btc/">
-        <span class="stripe"></span>
-        <div class="card-top">
-          <span class="card-no">06 / BTC</span>
-          <span class="arrow">→</span>
-        </div>
-        <div class="card-title">비트코인</div>
-        <div class="card-desc">BTC 보유 · 평단 · 손익 추적</div>
-        <div class="card-tags">
-          <span class="tag">CRYPTO</span>
-          <span class="tag">WALLET</span>
-          <span class="tag">P&L</span>
-        </div>
-      </a>
-      <a class="card c-teal" href="https://emilyjeong.github.io/whooing/">
-        <span class="stripe"></span>
-        <div class="card-top">
-          <span class="card-no">07 / WHOOING</span>
-          <span class="arrow">→</span>
-        </div>
-        <div class="card-title">가계부</div>
-        <div class="card-desc">수입 · 지출 · 카테고리 분석</div>
-        <div class="card-tags">
-          <span class="tag">BUDGET</span>
-          <span class="tag">EXPENSE</span>
-          <span class="tag">INCOME</span>
-        </div>
-      </a>
-    </div>
-    <div class="foot">
-      BUILD <span class="ver">2026.05</span> · SINGLE SOURCE OF TRUTH
+    <div class="w1-row">
+      <span class="k">올해 누적</span>
+      <span class="v pos">+0.6억 (+5.0%)</span>
     </div>
   </div>
-<script>
-  function updateTime() {
-    const d = new Date();
-    const hh = String(d.getHours()).padStart(2, '0');
-    const mm = String(d.getMinutes()).padStart(2, '0');
-    document.getElementById('now').textContent = `${hh}:${mm} KST`;
-  }
-  updateTime();
-  setInterval(updateTime, 30000);
-</script>
+</div>
+
+<!-- W2: 가계부 -->
+<div class="w">
+  <div class="w-head">
+    <span class="w-title">가계부</span>
+    <span class="w-tag">26.05</span>
+  </div>
+  <div class="w4-summary">
+    <div class="w4-col income">
+      <div class="lbl">총 수입</div>
+      <div class="v">₩12,500,000</div>
+    </div>
+    <div class="w4-col spend">
+      <div class="lbl">총 지출</div>
+      <div class="v">₩7,200,000</div>
+    </div>
+    <div class="w4-col rate">
+      <div class="lbl">저축률</div>
+      <div class="v pos">42.4%</div>
+    </div>
+  </div>
+  <div class="w4-divider"></div>
+  <div class="w4-save-label">
+    <span class="k">순저축</span>
+    <span class="v">
+      <span class="amt pos">+₩5,300,000</span> / ₩12,500,000
+    </span>
+  </div>
+  <div class="w4-bar">
+    <div class="fill pos" style="width: 42.4%;"></div>
+  </div>
+</div>
+
+<!-- W3: 부부 주식 합산 -->
+<div class="w">
+  <div class="w-head">
+    <span class="w-title">부부 주식 합산</span>
+    <span class="w-tag">Daily</span>
+  </div>
+  <div class="w2">
+    <div class="w2-left">
+      <div class="amt">₩ 50,500,000</div>
+      <div class="ret">
+        <span class="delta pos">▲ +100만</span>
+        전일 대비
+        <span class="pct pos">(+2.0%)</span>
+      </div>
+      <div class="stk">
+        <div class="row">
+          <span class="d" style="background: var(--cat-stock);"></span>
+          <span class="nm">TSLA</span>
+          <span class="pc">35%</span>
+        </div>
+        <div class="row">
+          <span class="d" style="background: var(--info);"></span>
+          <span class="nm">SCHD</span>
+          <span class="pc">22%</span>
+        </div>
+        <div class="row">
+          <span class="d" style="background: var(--cat-btc);"></span>
+          <span class="nm">QQQ</span>
+          <span class="pc">18%</span>
+        </div>
+        <div class="row">
+          <span class="d" style="background: var(--purple);"></span>
+          <span class="nm">etc</span>
+          <span class="pc">25%</span>
+        </div>
+      </div>
+    </div>
+    <div class="donut">
+      <svg width="86" height="86" viewBox="0 0 86 86" aria-hidden="true">
+        <circle cx="43" cy="43" r="32" fill="none" stroke="var(--border)" stroke-width="10"/>
+        <circle cx="43" cy="43" r="32" fill="none" stroke="var(--cat-stock)" stroke-width="10" stroke-dasharray="70 201"/>
+        <circle cx="43" cy="43" r="32" fill="none" stroke="var(--info)" stroke-width="10" stroke-dasharray="44 201" stroke-dashoffset="-70"/>
+        <circle cx="43" cy="43" r="32" fill="none" stroke="var(--cat-btc)" stroke-width="10" stroke-dasharray="36 201" stroke-dashoffset="-114"/>
+        <circle cx="43" cy="43" r="32" fill="none" stroke="var(--purple)" stroke-width="10" stroke-dasharray="50 201" stroke-dashoffset="-150"/>
+      </svg>
+      <div class="donut-c">
+        <div class="v">8 종목</div>
+        <div class="l">holdings</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- W4: 주식 수량 목표 -->
+<div class="w w3">
+  <div class="w-head">
+    <span class="w-title">주식 수량 목표</span>
+    <span class="w-tag">progress</span>
+  </div>
+  <div class="row">
+    <span class="tk" style="color: var(--cat-stock);">TSLA</span>
+    <div class="bar"><div class="fill" style="width: 80%; background: var(--cat-stock);"></div></div>
+    <span class="cnt">80<span style="color: var(--ink-dim);">/100</span></span>
+  </div>
+  <div class="row">
+    <span class="tk" style="color: var(--info);">SCHD</span>
+    <div class="bar"><div class="fill" style="width: 100%; background: var(--info);"></div></div>
+    <span class="cnt"><span class="done">50/50 ✓</span></span>
+  </div>
+  <div class="row">
+    <span class="tk" style="color: var(--cat-btc);">QQQ</span>
+    <div class="bar"><div class="fill" style="width: 45%; background: var(--cat-btc);"></div></div>
+    <span class="cnt">45<span style="color: var(--ink-dim);">/100</span></span>
+  </div>
+  <div class="row">
+    <span class="tk" style="color: var(--purple);">VOO</span>
+    <div class="bar"><div class="fill" style="width: 30%; background: var(--purple);"></div></div>
+    <span class="cnt">30<span style="color: var(--ink-dim);">/100</span></span>
+  </div>
+</div>
+
+<!-- W5: 연금 -->
+<div class="w">
+  <div class="w-head">
+    <span class="w-title">연금</span>
+    <span class="w-tag">Daily</span>
+  </div>
+  <div class="w-pension-top">
+    <div class="w-pension-amt">₩ 12,500,000</div>
+    <div class="w-pension-ret">
+      <span class="delta pos">▲ +30만</span>
+      전일 대비
+      <span class="pct pos">(+2.4%)</span>
+    </div>
+  </div>
+  <div class="w-pension-divider"></div>
+  <div class="w-pension-label">섹터 분포</div>
+  <div class="w-pension-sectors">
+    <div class="w-pension-row">
+      <span class="nm">지수</span>
+      <div class="bar"><div class="fill" style="width: 45%; background: var(--info);"></div></div>
+      <span class="pct">45%</span>
+    </div>
+    <div class="w-pension-row">
+      <span class="nm">반도체</span>
+      <div class="bar"><div class="fill" style="width: 22%; background: var(--accent);"></div></div>
+      <span class="pct">22%</span>
+    </div>
+    <div class="w-pension-row">
+      <span class="nm">AI</span>
+      <div class="bar"><div class="fill" style="width: 18%; background: var(--pos);"></div></div>
+      <span class="pct">18%</span>
+    </div>
+    <div class="w-pension-row">
+      <span class="nm">바이오</span>
+      <div class="bar"><div class="fill" style="width: 10%; background: var(--purple);"></div></div>
+      <span class="pct">10%</span>
+    </div>
+    <div class="w-pension-row">
+      <span class="nm">기타</span>
+      <div class="bar"><div class="fill" style="width: 5%; background: var(--ink-dim);"></div></div>
+      <span class="pct">5%</span>
+    </div>
+  </div>
+</div>
+
+<!-- W6: BTC 목표 -->
+<div class="w">
+  <div class="w-head">
+    <span class="w-title">BTC 목표</span>
+    <span class="w-tag">Daily</span>
+  </div>
+  <div class="w5">
+    <div class="w5-ring">
+      <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true">
+        <circle cx="28" cy="28" r="22" fill="none" stroke="var(--border)" stroke-width="6"/>
+        <circle cx="28" cy="28" r="22" fill="none" stroke="var(--cat-btc)" stroke-width="6" stroke-dasharray="89 138" stroke-linecap="round"/>
+      </svg>
+      <div class="c">65%</div>
+    </div>
+    <div class="w5-body">
+      <div class="amt">0.65 / 1.0 BTC</div>
+      <div class="goal">목표 1 BTC · 평가 ₩ 89,200,000</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────── LAUNCHER ─────────────── -->
+<div class="sec-label" style="margin-top: 22px;">
+  <span>모듈</span>
+  <span class="count">7 apps</span>
+</div>
+
+<div class="launcher">
+  <a class="app" href="/total_asset/">
+    <div class="app-ic" style="background: rgba(232,184,0,0.12);">📈</div>
+    <div class="app-lbl">자산 연수익률</div>
+  </a>
+  <a class="app" href="/family_portfolio/">
+    <div class="app-ic" style="background: rgba(0,201,138,0.12);">👩‍❤️‍👨</div>
+    <div class="app-lbl">부부 주식 합산</div>
+  </a>
+  <a class="app" href="/market/">
+    <div class="app-ic" style="background: rgba(90,171,240,0.12);">📡</div>
+    <div class="app-lbl">시장 지표</div>
+  </a>
+  <a class="app" href="/realestate/">
+    <div class="app-ic" style="background: rgba(90,171,240,0.12);">🏠</div>
+    <div class="app-lbl">부동산 지도</div>
+  </a>
+  <a class="app" href="/target/">
+    <div class="app-ic" style="background: rgba(184,168,240,0.12);">🎯</div>
+    <div class="app-lbl">주식 목표</div>
+  </a>
+  <a class="app" href="/cashflow/">
+    <div class="app-ic" style="background: rgba(232,184,0,0.12);">💰</div>
+    <div class="app-lbl">가계부</div>
+  </a>
+  <a class="app" href="/btc/">
+    <div class="app-ic" style="background: rgba(240,122,64,0.12);">₿</div>
+    <div class="app-lbl">BTC</div>
+  </a>
+  <span class="app add" aria-disabled="true">
+    <div class="app-ic">+</div>
+    <div class="app-lbl">추가</div>
+  </span>
+</div>
+```
+
+  </div>
+
+  <script>
+    // 헤더 시각 — KST 기준, 1분마다 갱신
+    (function () {
+      const el = document.getElementById('ph-time');
+      if (!el) return;
+
+      const pad = (n) => String(n).padStart(2, '0');
+      const render = () => {
+        const d = new Date();
+        const y = d.getFullYear();
+        const mo = pad(d.getMonth() + 1);
+        const da = pad(d.getDate());
+        const hh = pad(d.getHours());
+        const mm = pad(d.getMinutes());
+        el.textContent = `${y}.${mo}.${da} · ${hh}:${mm}`;
+      };
+
+      render();
+      // 다음 분 경계까지 대기 후 매 분 갱신
+      const now = new Date();
+      const msToNextMinute = (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
+      setTimeout(() => {
+        render();
+        setInterval(render, 60 * 1000);
+      }, msToNextMinute);
+    })();
+  </script>
+
 </body>
 </html>
