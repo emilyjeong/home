@@ -183,7 +183,7 @@
       text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1px;
     }
     .w3 .row {
-      display: grid; grid-template-columns: 36px 1fr 60px;
+      display: grid; grid-template-columns: 50px 1fr 70px;
       align-items: center; gap: 8px; padding: 4px 0; font-size: 11px;
     }
     .w3 .row .tk { font-family: var(--font-mono); font-weight: 700; font-size: 10px; }
@@ -368,28 +368,14 @@
     <div class="w w3">
       <div class="w-head">
         <span class="w-title">주식 수량 목표</span>
-        <span class="w-tag">progress</span>
+        <span class="w-tag" id="w-targets-tag">progress</span>
       </div>
-      <div class="row">
-        <span class="tk" style="color: var(--cat-stock);">TSLA</span>
-        <div class="bar"><div class="fill" style="width: 80%; background: var(--cat-stock);"></div></div>
-        <span class="cnt">80<span style="color: var(--ink-dim);">/100</span></span>
+
+      <div id="w-targets-loading" style="padding: 6px 0;">
+        <span class="loading">목표 불러오는 중<span class="loading-dots">..</span> <span class="pulse">🎯</span></span>
       </div>
-      <div class="row">
-        <span class="tk" style="color: var(--info);">SCHD</span>
-        <div class="bar"><div class="fill" style="width: 100%; background: var(--info);"></div></div>
-        <span class="cnt"><span class="done">50/50 ✓</span></span>
-      </div>
-      <div class="row">
-        <span class="tk" style="color: var(--cat-btc);">QQQ</span>
-        <div class="bar"><div class="fill" style="width: 45%; background: var(--cat-btc);"></div></div>
-        <span class="cnt">45<span style="color: var(--ink-dim);">/100</span></span>
-      </div>
-      <div class="row">
-        <span class="tk" style="color: var(--purple);">VOO</span>
-        <div class="bar"><div class="fill" style="width: 30%; background: var(--purple);"></div></div>
-        <span class="cnt">30<span style="color: var(--ink-dim);">/100</span></span>
-      </div>
+
+      <div id="w-targets-rows" style="display: none;"></div>
     </div>
 
     <!-- W5: 연금 -->
@@ -562,11 +548,48 @@
         barEl.className = 'fill ' + cls;
       }
 
-      // 로딩 → 데이터 토글
       const loadingEl = document.getElementById('w-cashflow-loading');
       const dataEl = document.getElementById('w-cashflow-data');
       if (loadingEl) loadingEl.style.display = 'none';
       if (dataEl) dataEl.style.display = '';
+    }
+
+    function renderTargets(data) {
+      const stocks = data.stocks || [];
+      if (stocks.length === 0) return;
+
+      const COLORS = [
+        'var(--cat-stock)',
+        'var(--info)',
+        'var(--cat-btc)',
+        'var(--purple)',
+        'var(--accent)'
+      ];
+
+      const container = document.getElementById('w-targets-rows');
+      if (!container) return;
+
+      container.innerHTML = stocks.map((s, i) => {
+        const color = COLORS[i % COLORS.length];
+        const fillW = Math.min(100, Math.round(s.progressPct * 100));
+        const cnt = Math.round(s.current);
+        const target = s.target;
+        const isComplete = s.complete;
+
+        const cntHtml = isComplete
+          ? `<span class="done">${cnt}/${target} ✓</span>`
+          : `${cnt}<span style="color: var(--ink-dim);">/${target}</span>`;
+
+        return `<div class="row">
+          <span class="tk" style="color: ${color};">${s.ticker}</span>
+          <div class="bar"><div class="fill" style="width: ${fillW}%; background: ${color};"></div></div>
+          <span class="cnt">${cntHtml}</span>
+        </div>`;
+      }).join('');
+
+      const loadingEl = document.getElementById('w-targets-loading');
+      if (loadingEl) loadingEl.style.display = 'none';
+      container.style.display = '';
     }
 
     async function fetchAndRender(endpoint, renderFn, label) {
@@ -586,7 +609,8 @@
       const E = cfg.ENDPOINTS;
       await Promise.all([
         fetchAndRender(E.totalAsset, renderTotalAsset, '순자산'),
-        fetchAndRender(E.cashflow,   renderCashflow,   '가계부')
+        fetchAndRender(E.cashflow,   renderCashflow,   '가계부'),
+        fetchAndRender(E.target,     renderTargets,    '주식 목표')
       ]);
     }
 
