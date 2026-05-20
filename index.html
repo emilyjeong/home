@@ -116,6 +116,25 @@
       text-transform: uppercase; letter-spacing: 0.06em;
     }
 
+    /* 로딩 placeholder */
+    .loading {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-mid);
+      letter-spacing: 0;
+    }
+    .loading-dots { font-family: var(--font-mono); }
+    @keyframes pulse-emoji {
+      0%, 100% { transform: scale(1);    opacity: 0.7; }
+      50%      { transform: scale(1.3);  opacity: 1; }
+    }
+    .pulse {
+      display: inline-block;
+      animation: pulse-emoji 1.2s ease-in-out infinite;
+      transform-origin: center;
+    }
+
     .w1-amt {
       font-family: var(--font-mono); font-size: 24px; font-weight: 700;
       letter-spacing: -0.02em; color: var(--ink); margin-bottom: 10px;
@@ -336,13 +355,15 @@
       <span class="count">6 widgets</span>
     </div>
 
-    <!-- W1: 순자산 (로딩 placeholder) -->
+    <!-- W1: 순자산 (로딩 + 💰 펄스) -->
     <div class="w">
       <div class="w-head">
         <span class="w-title">순자산</span>
-        <span class="w-tag" id="w-totalAsset-tag" style="color: var(--ink-dim);">···</span>
+        <span class="w-tag" id="w-totalAsset-tag">···</span>
       </div>
-      <div class="w1-amt" id="w-totalAsset-amt" style="color: var(--ink-dim);">···</div>
+      <div class="w1-amt" id="w-totalAsset-amt">
+        <span class="loading">자산 불러오는 중<span class="loading-dots">..</span> <span class="pulse">💰</span></span>
+      </div>
       <div class="w1-rows">
         <div class="w1-row">
           <span class="k">지난달 대비</span>
@@ -529,10 +550,6 @@
       const el = document.getElementById(id);
       if (el) el.innerHTML = html;
     }
-    function clearLoadingStyle(id) {
-      const el = document.getElementById(id);
-      if (el) el.style.color = '';
-    }
 
     function renderTotalAsset(data) {
       const years = data.years || [];
@@ -544,14 +561,12 @@
       const ttl = current.summary && current.summary.ttl;
       if (ttl) {
         setText('w-totalAsset-amt', '₩ ' + Math.round(ttl).toLocaleString('ko-KR'));
-        clearLoadingStyle('w-totalAsset-amt');
       }
 
       const evalDate = current.evalDate || '';
       if (evalDate) {
         const [y, m] = evalDate.split('-');
         setText('w-totalAsset-tag', `${y.slice(2)}.${m} · Monthly`);
-        clearLoadingStyle('w-totalAsset-tag');
       }
 
       if (snaps.length >= 2 && ttl) {
