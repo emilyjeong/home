@@ -3,13 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
   <meta name="color-scheme" content="dark">
-  <meta name="supported-color-schemes" content="dark">
   <meta name="theme-color" content="#0a0a09">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -49,112 +46,52 @@
       padding: max(18px, env(safe-area-inset-top)) 14px max(28px, env(safe-area-inset-bottom));
     }
     .container { max-width: var(--max-width); margin: 0 auto; }
-    .ph-head {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0 4px 14px; border-bottom: 1px solid var(--border); margin-bottom: 16px;
-    }
-    .ph-title {
-      font-size: 24px; font-weight: 700; letter-spacing: -0.02em;
-      display: flex; align-items: center; gap: 8px;
-    }
+    .ph-head { display: flex; justify-content: space-between; align-items: center; padding: 0 4px 14px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+    .ph-title { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; display: flex; align-items: center; gap: 8px; }
     .ph-title .emoji { font-size: 22px; }
     .ph-time { font-family: var(--font-mono); font-size: 11px; color: var(--ink-dim); }
-    .sec-label {
-      font-size: 9.5px; font-weight: 700; color: var(--ink-dim);
-      text-transform: uppercase; letter-spacing: 0.1em;
-      margin: 4px 4px 8px;
-      display: flex; justify-content: space-between; align-items: baseline;
-    }
+    .sec-label { font-size: 9.5px; font-weight: 700; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.1em; margin: 4px 4px 8px; display: flex; justify-content: space-between; align-items: baseline; }
     .sec-label .count { color: var(--ink-mid); font-family: var(--font-mono); }
-    .w {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 13px 14px; margin-bottom: 8px;
-    }
-    .w-head {
-      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;
-    }
-    .w-title {
-      font-size: 11px; font-weight: 700; color: var(--accent);
-      text-transform: uppercase; letter-spacing: 0.08em;
-    }
-    .w-tag {
-      font-family: var(--font-mono); font-size: 9px; color: var(--ink-dim);
-      text-transform: uppercase; letter-spacing: 0.06em;
-    }
-    .loading {
-      font-family: var(--font-sans); font-size: 14px;
-      font-weight: 600; color: var(--ink-mid);
-    }
+    .w { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 13px 14px; margin-bottom: 8px; }
+    .w-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+    .w-title { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; }
+    .w-tag { font-family: var(--font-mono); font-size: 9px; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.06em; }
+    .loading { font-family: var(--font-sans); font-size: 14px; font-weight: 600; color: var(--ink-mid); }
     .loading-dots { font-family: var(--font-mono); }
     @keyframes pulse-emoji {
       0%, 100% { transform: scale(1); opacity: 0.7; }
       50% { transform: scale(1.3); opacity: 1; }
     }
-    .pulse {
-      display: inline-block;
-      animation: pulse-emoji 1.2s ease-in-out infinite;
-      transform-origin: center;
-    }
-    .w1-amt {
-      font-family: var(--font-mono); font-size: 24px; font-weight: 700;
-      letter-spacing: -0.02em; color: var(--ink); margin-bottom: 10px;
-    }
+    .pulse { display: inline-block; animation: pulse-emoji 1.2s ease-in-out infinite; transform-origin: center; }
+    .w1-amt { font-family: var(--font-mono); font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 10px; }
     .w1-rows { display: flex; flex-direction: column; gap: 4px; }
-    .w1-row {
-      display: flex; justify-content: space-between; align-items: baseline; font-size: 11px;
-    }
+    .w1-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 11px; }
     .w1-row .k { color: var(--ink-dim); font-family: var(--font-sans); }
     .w1-row .v { font-family: var(--font-mono); font-weight: 600; }
     .w1-row .v.pos { color: var(--pos); }
     .w1-row .v.neg { color: var(--neg); }
-    .w4-summary {
-      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 14px;
-    }
+    .w4-summary { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 14px; }
     .w4-col { text-align: center; padding: 6px 2px; }
-    .w4-col .lbl {
-      font-size: 9.5px; color: var(--ink); text-transform: uppercase;
-      letter-spacing: 0.06em; font-weight: 700; margin-bottom: 6px;
-    }
-    .w4-col .v {
-      font-family: var(--font-mono); font-size: 13px; font-weight: 700;
-      letter-spacing: -0.04em; white-space: nowrap;
-    }
+    .w4-col .lbl { font-size: 9.5px; color: var(--ink); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; margin-bottom: 6px; }
+    .w4-col .v { font-family: var(--font-mono); font-size: 13px; font-weight: 700; letter-spacing: -0.04em; white-space: nowrap; }
     .w4-col.income .v { color: var(--info); }
     .w4-col.spend  .v { color: var(--purple); }
     .w4-col.rate   .v.pos { color: var(--pos); }
     .w4-col.rate   .v.neg { color: var(--neg); }
     .w4-divider { height: 1px; background: var(--border); margin: 4px 0 12px; }
-    .w4-save-label {
-      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;
-    }
-    .w4-save-label .k {
-      font-size: 10px; color: var(--ink-dim); text-transform: uppercase;
-      letter-spacing: 0.06em; font-weight: 600;
-    }
-    .w4-save-label .v {
-      font-family: var(--font-mono); font-size: 11px; color: var(--ink-mid); font-weight: 600;
-    }
+    .w4-save-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .w4-save-label .k { font-size: 10px; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+    .w4-save-label .v { font-family: var(--font-mono); font-size: 11px; color: var(--ink-mid); font-weight: 600; }
     .w4-save-label .v .amt { font-weight: 700; }
     .w4-save-label .v .amt.pos { color: var(--pos); }
     .w4-save-label .v .amt.neg { color: var(--neg); }
-    .w4-bar {
-      width: 100%; height: 5px; background: var(--border);
-      border-radius: 3px; overflow: hidden;
-    }
+    .w4-bar { width: 100%; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
     .w4-bar .fill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
     .w4-bar .fill.pos { background: var(--pos); }
     .w4-bar .fill.neg { background: var(--neg); }
-    .w2 {
-      display: grid; grid-template-columns: 1fr 86px; gap: 14px; align-items: center;
-    }
-    .w2-left .amt {
-      font-family: var(--font-mono); font-size: 22px; font-weight: 700;
-      color: var(--ink); letter-spacing: -0.02em;
-    }
-    .w2-left .ret {
-      font-size: 11px; font-family: var(--font-mono); font-weight: 600;
-      margin-top: 2px; color: var(--ink);
-    }
+    .w2 { display: grid; grid-template-columns: 1fr 86px; gap: 14px; align-items: center; }
+    .w2-left .amt { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
+    .w2-left .ret { font-size: 11px; font-family: var(--font-mono); font-weight: 600; margin-top: 2px; color: var(--ink-mid); }
     .w2-left .ret .delta { font-weight: 700; }
     .w2-left .ret .delta.pos { color: var(--pos); }
     .w2-left .ret .delta.neg { color: var(--neg); }
@@ -162,113 +99,50 @@
     .w2-left .ret .pct.neg { color: var(--neg); }
     .w2-left .stk { margin-top: 10px; display: flex; flex-direction: column; gap: 3px; }
     .w2-left .stk .row { display: flex; align-items: center; font-size: 10px; gap: 6px; }
-    .w2-left .stk .d { width: 6px; height: 6px; border-radius: 50%; }
-    .w2-left .stk .nm {
-      font-family: var(--font-mono); color: var(--ink-mid); font-weight: 600; width: 38px;
-    }
-    .w2-left .stk .pc {
-      font-family: var(--font-mono); color: var(--ink-dim); margin-left: auto; font-size: 9.5px;
-    }
-    .donut {
-      width: 86px; height: 86px;
-      display: flex; align-items: center; justify-content: center; position: relative;
-    }
+    .w2-left .stk .d { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .w2-left .stk .nm { font-family: var(--font-mono); color: var(--ink-mid); font-weight: 600; width: 50px; }
+    .w2-left .stk .pc { font-family: var(--font-mono); color: var(--ink-dim); margin-left: auto; font-size: 9.5px; }
+    .donut { width: 86px; height: 86px; display: flex; align-items: center; justify-content: center; position: relative; }
     .donut svg { transform: rotate(-90deg); }
     .donut-c { position: absolute; text-align: center; }
-    .donut-c .v {
-      font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--ink);
-    }
-    .donut-c .l {
-      font-size: 8px; color: var(--ink-dim);
-      text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1px;
-    }
-    .w3 .row {
-      display: grid; grid-template-columns: 50px 1fr 70px;
-      align-items: center; gap: 8px; padding: 4px 0; font-size: 11px;
-    }
+    .donut-c .v { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--ink); }
+    .donut-c .l { font-size: 8px; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1px; }
+    .w3 .row { display: grid; grid-template-columns: 50px 1fr 70px; align-items: center; gap: 8px; padding: 4px 0; font-size: 11px; }
     .w3 .row .tk { font-family: var(--font-mono); font-weight: 700; font-size: 10px; }
-    .w3 .row .bar {
-      background: var(--border); height: 4px; border-radius: 2px; overflow: hidden;
-    }
+    .w3 .row .bar { background: var(--border); height: 4px; border-radius: 2px; overflow: hidden; }
     .w3 .row .fill { height: 100%; }
-    .w3 .row .cnt {
-      font-family: var(--font-mono); font-size: 10px; color: var(--ink-mid); text-align: right;
-    }
+    .w3 .row .cnt { font-family: var(--font-mono); font-size: 10px; color: var(--ink-mid); text-align: right; }
     .w3 .row .cnt .done { color: var(--pos); }
     .w-pension-top { margin-bottom: 12px; }
-    .w-pension-amt {
-      font-family: var(--font-mono); font-size: 20px; font-weight: 700;
-      color: var(--ink); letter-spacing: -0.02em; margin-bottom: 4px;
-    }
-    .w-pension-ret {
-      font-size: 11px; font-family: var(--font-mono); font-weight: 600; color: var(--ink);
-    }
+    .w-pension-amt { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 4px; }
+    .w-pension-ret { font-size: 11px; font-family: var(--font-mono); font-weight: 600; color: var(--ink-mid); }
     .w-pension-ret .delta { font-weight: 700; }
     .w-pension-ret .delta.pos { color: var(--pos); }
     .w-pension-ret .delta.neg { color: var(--neg); }
     .w-pension-ret .pct.pos { color: var(--pos); }
     .w-pension-ret .pct.neg { color: var(--neg); }
     .w-pension-divider { height: 1px; background: var(--border); margin: 10px 0; }
-    .w-pension-label {
-      font-size: 9px; color: var(--ink-dim); text-transform: uppercase;
-      letter-spacing: 0.08em; font-weight: 600; margin-bottom: 8px;
-    }
+    .w-pension-label { font-size: 9px; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 8px; }
     .w-pension-sectors { display: flex; flex-direction: column; gap: 5px; }
-    .w-pension-row {
-      display: grid; grid-template-columns: 60px 1fr 40px;
-      align-items: center; gap: 8px; font-size: 11px;
-    }
-    .w-pension-row .nm {
-      font-family: var(--font-sans); font-weight: 500; color: var(--ink-mid); font-size: 10.5px;
-    }
-    .w-pension-row .bar {
-      background: var(--border); height: 4px; border-radius: 2px; overflow: hidden;
-    }
+    .w-pension-row { display: grid; grid-template-columns: 90px 1fr 40px; align-items: center; gap: 8px; font-size: 11px; }
+    .w-pension-row .nm { font-family: var(--font-sans); font-weight: 500; color: var(--ink-mid); font-size: 10.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .w-pension-row .bar { background: var(--border); height: 4px; border-radius: 2px; overflow: hidden; }
     .w-pension-row .fill { height: 100%; border-radius: 2px; }
-    .w-pension-row .pct {
-      font-family: var(--font-mono); font-size: 10px; color: var(--ink-mid); text-align: right;
-    }
+    .w-pension-row .pct { font-family: var(--font-mono); font-size: 10px; color: var(--ink-mid); text-align: right; }
     .w5 { display: flex; align-items: center; gap: 12px; }
     .w5-ring { position: relative; width: 56px; height: 56px; flex-shrink: 0; }
     .w5-ring svg { transform: rotate(-90deg); }
-    .w5-ring .c {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--cat-btc);
-    }
+    .w5-ring .c { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--cat-btc); }
     .w5-body { flex: 1; }
-    .w5-body .amt {
-      font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--ink);
-    }
-    .w5-body .goal {
-      font-size: 10px; color: var(--ink-mid); font-family: var(--font-mono); margin-top: 4px;
-    }
+    .w5-body .amt { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--ink); }
+    .w5-body .goal { font-size: 10px; color: var(--ink-mid); font-family: var(--font-mono); margin-top: 4px; }
     .launcher { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
-    .app {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius-sm); padding: 14px 14px;
-      display: flex; align-items: center; gap: 12px;
-      text-decoration: none; color: inherit;
-      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .app:hover, .app:focus-visible {
-      background: var(--card-hi); border-color: var(--border-mid);
-    }
+    .app { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 14px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease; -webkit-tap-highlight-color: transparent; }
+    .app:hover, .app:focus-visible { background: var(--card-hi); border-color: var(--border-mid); }
     .app:active { transform: scale(0.98); }
-    .app-ic {
-      width: 38px; height: 38px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; flex-shrink: 0;
-    }
-    .app-lbl {
-      font-size: 12px; color: var(--ink); font-weight: 600;
-      letter-spacing: -0.01em; line-height: 1.25;
-    }
-    .app.add {
-      background: var(--card-hi); border-style: dashed;
-      border-color: var(--border-mid); cursor: default;
-    }
+    .app-ic { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .app-lbl { font-size: 12px; color: var(--ink); font-weight: 600; letter-spacing: -0.01em; line-height: 1.25; }
+    .app.add { background: var(--card-hi); border-style: dashed; border-color: var(--border-mid); cursor: default; }
     .app.add:hover { background: var(--card-hi); }
     .app.add .app-ic { background: transparent; color: var(--ink-dim); font-size: 18px; }
     .app.add .app-lbl { color: var(--ink-dim); }
@@ -314,11 +188,9 @@
         <span class="w-title">가계부</span>
         <span class="w-tag" id="w-cashflow-tag">···</span>
       </div>
-
       <div id="w-cashflow-loading" style="padding: 6px 0;">
         <span class="loading">가계부 불러오는 중<span class="loading-dots">..</span> <span class="pulse">💸</span></span>
       </div>
-
       <div id="w-cashflow-data" style="display: none;">
         <div class="w4-summary">
           <div class="w4-col income"><div class="lbl">총 수입</div><div class="v" id="w-cashflow-income">—</div></div>
@@ -338,28 +210,25 @@
     <div class="w">
       <div class="w-head">
         <span class="w-title">부부 주식 합산</span>
-        <span class="w-tag">Daily</span>
+        <span class="w-tag">Total</span>
       </div>
-      <div class="w2">
-        <div class="w2-left">
-          <div class="amt">₩ 50,500,000</div>
-          <div class="ret"><span class="delta pos">▲ +100만</span> 전일 대비 <span class="pct pos">(+2.0%)</span></div>
-          <div class="stk">
-            <div class="row"><span class="d" style="background: var(--cat-stock);"></span><span class="nm">TSLA</span><span class="pc">35%</span></div>
-            <div class="row"><span class="d" style="background: var(--info);"></span><span class="nm">SCHD</span><span class="pc">22%</span></div>
-            <div class="row"><span class="d" style="background: var(--cat-btc);"></span><span class="nm">QQQ</span><span class="pc">18%</span></div>
-            <div class="row"><span class="d" style="background: var(--purple);"></span><span class="nm">etc</span><span class="pc">25%</span></div>
+      <div id="w-stock-loading" style="padding: 6px 0;">
+        <span class="loading">주식 불러오는 중<span class="loading-dots">..</span> <span class="pulse">📊</span></span>
+      </div>
+      <div id="w-stock-data" style="display: none;">
+        <div class="w2">
+          <div class="w2-left">
+            <div class="amt" id="w-stock-amt">—</div>
+            <div class="ret" id="w-stock-ret">—</div>
+            <div class="stk" id="w-stock-rows"></div>
           </div>
-        </div>
-        <div class="donut">
-          <svg width="86" height="86" viewBox="0 0 86 86" aria-hidden="true">
-            <circle cx="43" cy="43" r="32" fill="none" stroke="var(--border)" stroke-width="10"/>
-            <circle cx="43" cy="43" r="32" fill="none" stroke="var(--cat-stock)" stroke-width="10" stroke-dasharray="70 201"/>
-            <circle cx="43" cy="43" r="32" fill="none" stroke="var(--info)" stroke-width="10" stroke-dasharray="44 201" stroke-dashoffset="-70"/>
-            <circle cx="43" cy="43" r="32" fill="none" stroke="var(--cat-btc)" stroke-width="10" stroke-dasharray="36 201" stroke-dashoffset="-114"/>
-            <circle cx="43" cy="43" r="32" fill="none" stroke="var(--purple)" stroke-width="10" stroke-dasharray="50 201" stroke-dashoffset="-150"/>
-          </svg>
-          <div class="donut-c"><div class="v">8 종목</div><div class="l">holdings</div></div>
+          <div class="donut">
+            <svg width="86" height="86" viewBox="0 0 86 86" aria-hidden="true">
+              <circle cx="43" cy="43" r="32" fill="none" stroke="var(--border)" stroke-width="10"/>
+              <g id="w-stock-donut-segments"></g>
+            </svg>
+            <div class="donut-c"><div class="v" id="w-stock-count">—</div><div class="l">holdings</div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -370,11 +239,9 @@
         <span class="w-title">주식 수량 목표</span>
         <span class="w-tag" id="w-targets-tag">progress</span>
       </div>
-
       <div id="w-targets-loading" style="padding: 6px 0;">
         <span class="loading">목표 불러오는 중<span class="loading-dots">..</span> <span class="pulse">🎯</span></span>
       </div>
-
       <div id="w-targets-rows" style="display: none;"></div>
     </div>
 
@@ -382,20 +249,19 @@
     <div class="w">
       <div class="w-head">
         <span class="w-title">연금</span>
-        <span class="w-tag">Daily</span>
+        <span class="w-tag">Total</span>
       </div>
-      <div class="w-pension-top">
-        <div class="w-pension-amt">₩ 12,500,000</div>
-        <div class="w-pension-ret"><span class="delta pos">▲ +30만</span> 전일 대비 <span class="pct pos">(+2.4%)</span></div>
+      <div id="w-pension-loading" style="padding: 6px 0;">
+        <span class="loading">연금 불러오는 중<span class="loading-dots">..</span> <span class="pulse">🪙</span></span>
       </div>
-      <div class="w-pension-divider"></div>
-      <div class="w-pension-label">섹터 분포</div>
-      <div class="w-pension-sectors">
-        <div class="w-pension-row"><span class="nm">지수</span><div class="bar"><div class="fill" style="width: 45%; background: var(--info);"></div></div><span class="pct">45%</span></div>
-        <div class="w-pension-row"><span class="nm">반도체</span><div class="bar"><div class="fill" style="width: 22%; background: var(--accent);"></div></div><span class="pct">22%</span></div>
-        <div class="w-pension-row"><span class="nm">AI</span><div class="bar"><div class="fill" style="width: 18%; background: var(--pos);"></div></div><span class="pct">18%</span></div>
-        <div class="w-pension-row"><span class="nm">바이오</span><div class="bar"><div class="fill" style="width: 10%; background: var(--purple);"></div></div><span class="pct">10%</span></div>
-        <div class="w-pension-row"><span class="nm">기타</span><div class="bar"><div class="fill" style="width: 5%; background: var(--ink-dim);"></div></div><span class="pct">5%</span></div>
+      <div id="w-pension-data" style="display: none;">
+        <div class="w-pension-top">
+          <div class="w-pension-amt" id="w-pension-amt">—</div>
+          <div class="w-pension-ret" id="w-pension-ret">—</div>
+        </div>
+        <div class="w-pension-divider"></div>
+        <div class="w-pension-label">섹터 분포</div>
+        <div class="w-pension-sectors" id="w-pension-sectors"></div>
       </div>
     </div>
 
@@ -452,6 +318,7 @@
       setTimeout(() => { render(); setInterval(render, 60 * 1000); }, ms);
     })();
 
+    // ─── 유틸 ───
     function formatDeltaUnit(amount) {
       const abs = Math.abs(amount);
       const sign = amount >= 0 ? '+' : '-';
@@ -467,22 +334,12 @@
       const cls = amount >= 0 ? 'pos' : 'neg';
       return `<span class="v ${cls}">${formatDeltaUnit(amount)} (${formatPct(pct)})</span>`;
     }
-    function fmtKRW(n) {
-      return '₩' + Math.round(n).toLocaleString('ko-KR');
-    }
-    function setText(id, text) {
-      const el = document.getElementById(id);
-      if (el) el.textContent = text;
-    }
-    function setHTML(id, html) {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = html;
-    }
-    function setClass(id, className) {
-      const el = document.getElementById(id);
-      if (el) el.className = className;
-    }
+    function fmtKRW(n) { return '₩' + Math.round(n).toLocaleString('ko-KR'); }
+    function setText(id, text) { const el = document.getElementById(id); if (el) el.textContent = text; }
+    function setHTML(id, html) { const el = document.getElementById(id); if (el) el.innerHTML = html; }
+    function setClass(id, className) { const el = document.getElementById(id); if (el) el.className = className; }
 
+    // ─── W1: 순자산 ───
     function renderTotalAsset(data) {
       const years = data.years || [];
       if (years.length === 0) return;
@@ -498,7 +355,6 @@
         const [y, m] = evalDate.split('-');
         setText('w-totalAsset-tag', `${y.slice(2)}.${m} · Monthly`);
       }
-
       if (snaps.length >= 2 && ttl) {
         const last = snaps[snaps.length - 1];
         const prev = snaps[snaps.length - 2];
@@ -507,7 +363,6 @@
           setHTML('w-totalAsset-monthly', formatDeltaWithPct(ttl * pct, pct));
         }
       }
-
       if (previous && previous.summary && previous.summary.ttl && ttl) {
         const prevTtl = previous.summary.ttl;
         const deltaAmt = ttl - prevTtl;
@@ -516,6 +371,7 @@
       }
     }
 
+    // ─── W2: 가계부 ───
     function renderCashflow(data) {
       const trend = data.trend || [];
       if (trend.length === 0) return;
@@ -526,10 +382,7 @@
       const rate = income > 0 ? net / income : 0;
 
       const ym = String(current.ym || '');
-      if (ym.length === 6) {
-        setText('w-cashflow-tag', `${ym.slice(2,4)}.${ym.slice(4,6)}`);
-      }
-
+      if (ym.length === 6) setText('w-cashflow-tag', `${ym.slice(2,4)}.${ym.slice(4,6)}`);
       setText('w-cashflow-income', fmtKRW(income));
       setText('w-cashflow-spend',  fmtKRW(expenses));
 
@@ -547,25 +400,15 @@
         barEl.style.width = w + '%';
         barEl.className = 'fill ' + cls;
       }
-
-      const loadingEl = document.getElementById('w-cashflow-loading');
-      const dataEl = document.getElementById('w-cashflow-data');
-      if (loadingEl) loadingEl.style.display = 'none';
-      if (dataEl) dataEl.style.display = '';
+      document.getElementById('w-cashflow-loading').style.display = 'none';
+      document.getElementById('w-cashflow-data').style.display = '';
     }
 
+    // ─── W4: 주식 수량 목표 ───
     function renderTargets(data) {
       const stocks = data.stocks || [];
       if (stocks.length === 0) return;
-
-      const COLORS = [
-        'var(--cat-stock)',
-        'var(--info)',
-        'var(--cat-btc)',
-        'var(--purple)',
-        'var(--accent)'
-      ];
-
+      const COLORS = ['var(--cat-stock)', 'var(--info)', 'var(--cat-btc)', 'var(--purple)', 'var(--accent)'];
       const container = document.getElementById('w-targets-rows');
       if (!container) return;
 
@@ -574,12 +417,9 @@
         const fillW = Math.min(100, Math.round(s.progressPct * 100));
         const cnt = Math.round(s.current);
         const target = s.target;
-        const isComplete = s.complete;
-
-        const cntHtml = isComplete
+        const cntHtml = s.complete
           ? `<span class="done">${cnt}/${target} ✓</span>`
           : `${cnt}<span style="color: var(--ink-dim);">/${target}</span>`;
-
         return `<div class="row">
           <span class="tk" style="color: ${color};">${s.ticker}</span>
           <div class="bar"><div class="fill" style="width: ${fillW}%; background: ${color};"></div></div>
@@ -587,11 +427,125 @@
         </div>`;
       }).join('');
 
-      const loadingEl = document.getElementById('w-targets-loading');
-      if (loadingEl) loadingEl.style.display = 'none';
+      document.getElementById('w-targets-loading').style.display = 'none';
       container.style.display = '';
     }
 
+    // ─── W3/W5: 가족 포트폴리오 집계 ───
+    function aggregatePortfolio(data) {
+      const all = [
+        ...(data.wife && data.wife.holdings || []),
+        ...(data.husband && data.husband.holdings || [])
+      ];
+      const stocks  = all.filter(h => h.account !== 'KB');
+      const pension = all.filter(h => h.account === 'KB');
+
+      const sumValue = a => a.reduce((s, h) => s + (h.value || 0), 0);
+      const sumCost  = a => a.reduce((s, h) => s + ((h.qty || 0) * (h.avg || 0)), 0);
+
+      const byTicker = a => {
+        const m = new Map();
+        a.forEach(h => {
+          if (!m.has(h.ticker)) m.set(h.ticker, { ticker: h.ticker, value: 0 });
+          m.get(h.ticker).value += h.value || 0;
+        });
+        return [...m.values()].sort((a, b) => b.value - a.value);
+      };
+      const bySector = a => {
+        const m = new Map();
+        a.forEach(h => {
+          const k = h.sector || '기타';
+          if (!m.has(k)) m.set(k, { name: k, value: 0 });
+          m.get(k).value += h.value || 0;
+        });
+        return [...m.values()].sort((a, b) => b.value - a.value);
+      };
+
+      return {
+        stockTotal: sumValue(stocks),
+        stockCost: sumCost(stocks),
+        stockTickers: byTicker(stocks),
+        stockCount: stocks.length,
+        pensionTotal: sumValue(pension),
+        pensionCost: sumCost(pension),
+        pensionSectors: bySector(pension)
+      };
+    }
+
+    // ─── W3: 부부 주식 합산 ───
+    function renderStockSum(agg) {
+      const { stockTotal, stockCost, stockTickers, stockCount } = agg;
+      if (stockTotal === 0) return;
+      const pnl = stockTotal - stockCost;
+      const ret = stockCost > 0 ? pnl / stockCost : 0;
+      const cls = pnl >= 0 ? 'pos' : 'neg';
+      const sign = pnl >= 0 ? '▲' : '▼';
+
+      const COLORS = ['var(--cat-stock)', 'var(--info)', 'var(--cat-btc)', 'var(--purple)', 'var(--accent)'];
+      const top4 = stockTickers.slice(0, 4);
+      const restValue = stockTickers.slice(4).reduce((s, t) => s + t.value, 0);
+      const segments = restValue > 0 ? [...top4, { ticker: 'etc', value: restValue }] : top4;
+
+      setText('w-stock-amt', '₩ ' + Math.round(stockTotal).toLocaleString('ko-KR'));
+      setHTML('w-stock-ret',
+        `<span class="delta ${cls}">${sign} ${formatDeltaUnit(pnl).replace(/^[+-]/, '')}</span> 평가손익 <span class="pct ${cls}">(${formatPct(ret)})</span>`);
+
+      // 종목 텍스트
+      const rowsHtml = segments.map((seg, i) => {
+        const pct = (seg.value / stockTotal * 100).toFixed(0);
+        return `<div class="row"><span class="d" style="background: ${COLORS[i]};"></span><span class="nm">${seg.ticker}</span><span class="pc">${pct}%</span></div>`;
+      }).join('');
+      setHTML('w-stock-rows', rowsHtml);
+      setText('w-stock-count', stockCount + ' 종목');
+
+      // 도넛
+      const circumference = 2 * Math.PI * 32;
+      let offset = 0;
+      const donutHtml = segments.map((seg, i) => {
+        const len = (seg.value / stockTotal) * circumference;
+        const html = `<circle cx="43" cy="43" r="32" fill="none" stroke="${COLORS[i]}" stroke-width="10" stroke-dasharray="${len.toFixed(2)} ${circumference.toFixed(2)}" stroke-dashoffset="${(-offset).toFixed(2)}"/>`;
+        offset += len;
+        return html;
+      }).join('');
+      setHTML('w-stock-donut-segments', donutHtml);
+
+      document.getElementById('w-stock-loading').style.display = 'none';
+      document.getElementById('w-stock-data').style.display = '';
+    }
+
+    // ─── W5: 연금 ───
+    function renderPension(agg) {
+      const { pensionTotal, pensionCost, pensionSectors } = agg;
+      if (pensionTotal === 0) return;
+      const pnl = pensionTotal - pensionCost;
+      const ret = pensionCost > 0 ? pnl / pensionCost : 0;
+      const cls = pnl >= 0 ? 'pos' : 'neg';
+      const sign = pnl >= 0 ? '▲' : '▼';
+
+      const COLORS = ['var(--info)', 'var(--accent)', 'var(--pos)', 'var(--purple)', 'var(--ink-dim)'];
+      const top4 = pensionSectors.slice(0, 4);
+      const restValue = pensionSectors.slice(4).reduce((s, t) => s + t.value, 0);
+      const sectors = restValue > 0 ? [...top4, { name: '기타', value: restValue }] : top4;
+
+      setText('w-pension-amt', '₩ ' + Math.round(pensionTotal).toLocaleString('ko-KR'));
+      setHTML('w-pension-ret',
+        `<span class="delta ${cls}">${sign} ${formatDeltaUnit(pnl).replace(/^[+-]/, '')}</span> 평가손익 <span class="pct ${cls}">(${formatPct(ret)})</span>`);
+
+      const sectorsHtml = sectors.map((sec, i) => {
+        const pct = sec.value / pensionTotal * 100;
+        return `<div class="w-pension-row">
+          <span class="nm">${sec.name}</span>
+          <div class="bar"><div class="fill" style="width: ${pct.toFixed(0)}%; background: ${COLORS[i]};"></div></div>
+          <span class="pct">${pct.toFixed(0)}%</span>
+        </div>`;
+      }).join('');
+      setHTML('w-pension-sectors', sectorsHtml);
+
+      document.getElementById('w-pension-loading').style.display = 'none';
+      document.getElementById('w-pension-data').style.display = '';
+    }
+
+    // ─── 데이터 fetch ───
     async function fetchAndRender(endpoint, renderFn, label) {
       if (!endpoint) return;
       try {
@@ -603,6 +557,23 @@
       }
     }
 
+    async function loadFamilyPortfolio() {
+      const cfg = window.HOME_CONFIG;
+      const url = cfg && cfg.ENDPOINTS && cfg.ENDPOINTS.familyPortfolio;
+      if (!url) return;
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data && !data.error) {
+          const agg = aggregatePortfolio(data);
+          renderStockSum(agg);
+          renderPension(agg);
+        }
+      } catch (err) {
+        console.error('가족 포트폴리오 fetch 실패:', err);
+      }
+    }
+
     async function loadAndRender() {
       const cfg = window.HOME_CONFIG;
       if (!cfg || !cfg.ENDPOINTS) return;
@@ -610,7 +581,8 @@
       await Promise.all([
         fetchAndRender(E.totalAsset, renderTotalAsset, '순자산'),
         fetchAndRender(E.cashflow,   renderCashflow,   '가계부'),
-        fetchAndRender(E.target,     renderTargets,    '주식 목표')
+        fetchAndRender(E.target,     renderTargets,    '주식 목표'),
+        loadFamilyPortfolio()
       ]);
     }
 
