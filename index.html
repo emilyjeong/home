@@ -11,7 +11,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
 
-  <title>Overview · 인생 자동화</title>
+  <title>Overview</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -271,17 +271,22 @@
         <span class="w-title">BTC 목표</span>
         <span class="w-tag">Daily</span>
       </div>
-      <div class="w5">
-        <div class="w5-ring">
-          <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true">
-            <circle cx="28" cy="28" r="22" fill="none" stroke="var(--border)" stroke-width="6"/>
-            <circle cx="28" cy="28" r="22" fill="none" stroke="var(--cat-btc)" stroke-width="6" stroke-dasharray="89 138" stroke-linecap="round"/>
-          </svg>
-          <div class="c">65%</div>
-        </div>
-        <div class="w5-body">
-          <div class="amt">0.65 / 1.0 BTC</div>
-          <div class="goal">목표 1 BTC · 평가 ₩ 89,200,000</div>
+      <div id="w-btc-loading" style="padding: 6px 0;">
+        <span class="loading">비트코인 불러오는 중<span class="loading-dots">..</span> <span class="pulse">₿</span></span>
+      </div>
+      <div id="w-btc-data" style="display: none;">
+        <div class="w5">
+          <div class="w5-ring">
+            <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true">
+              <circle cx="28" cy="28" r="22" fill="none" stroke="var(--border)" stroke-width="6"/>
+              <circle id="w-btc-ring-fill" cx="28" cy="28" r="22" fill="none" stroke="var(--cat-btc)" stroke-width="6" stroke-dasharray="0 138" stroke-linecap="round"/>
+            </svg>
+            <div class="c" id="w-btc-pct">—</div>
+          </div>
+          <div class="w5-body">
+            <div class="amt" id="w-btc-amt">—</div>
+            <div class="goal" id="w-btc-goal">—</div>
+          </div>
         </div>
       </div>
     </div>
@@ -461,11 +466,12 @@
         return [...m.values()].sort((a, b) => b.value - a.value);
       };
 
+      const stockTickers = byTicker(stocks);
       return {
         stockTotal: sumValue(stocks),
         stockCost: sumCost(stocks),
-        stockTickers: byTicker(stocks),
-        stockCount: stocks.length,
+        stockTickers,
+        stockCount: stockTickers.length,  // unique ticker (KB 제외)
         pensionTotal: sumValue(pension),
         pensionCost: sumCost(pension),
         pensionSectors: bySector(pension)
@@ -490,7 +496,6 @@
       setHTML('w-stock-ret',
         `<span class="delta ${cls}">${sign} ${formatDeltaUnit(pnl).replace(/^[+-]/, '')}</span> 평가손익 <span class="pct ${cls}">(${formatPct(ret)})</span>`);
 
-      // 종목 텍스트
       const rowsHtml = segments.map((seg, i) => {
         const pct = (seg.value / stockTotal * 100).toFixed(0);
         return `<div class="row"><span class="d" style="background: ${COLORS[i]};"></span><span class="nm">${seg.ticker}</span><span class="pc">${pct}%</span></div>`;
@@ -498,7 +503,6 @@
       setHTML('w-stock-rows', rowsHtml);
       setText('w-stock-count', stockCount + ' 종목');
 
-      // 도넛
       const circumference = 2 * Math.PI * 32;
       let offset = 0;
       const donutHtml = segments.map((seg, i) => {
@@ -545,6 +549,31 @@
       document.getElementById('w-pension-data').style.display = '';
     }
 
+    // ─── W6: BTC ───
+    function renderBtc(data) {
+      if (!data.ok) return;
+      const holdings = data.btcHoldings || 0;
+      const target = data.targetBTC || 1;
+      const pct = holdings / target;
+      const snap = (data.snapshots && data.snapshots[0]) || {};
+      const valuation = snap.valuationKRW || 0;
+
+      setText('w-btc-pct', Math.round(pct * 100) + '%');
+
+      const ringFill = document.getElementById('w-btc-ring-fill');
+      if (ringFill) {
+        const circumference = 2 * Math.PI * 22; // ≈ 138
+        const len = Math.min(circumference, pct * circumference);
+        ringFill.setAttribute('stroke-dasharray', `${len.toFixed(2)} ${circumference.toFixed(2)}`);
+      }
+
+      setText('w-btc-amt', `${holdings.toFixed(2)} / ${target.toFixed(1)} BTC`);
+      setText('w-btc-goal', `목표 ${target} BTC · 평가 ${fmtKRW(valuation)}`);
+
+      document.getElementById('w-btc-loading').style.display = 'none';
+      document.getElementById('w-btc-data').style.display = '';
+    }
+
     // ─── 데이터 fetch ───
     async function fetchAndRender(endpoint, renderFn, label) {
       if (!endpoint) return;
@@ -582,6 +611,7 @@
         fetchAndRender(E.totalAsset, renderTotalAsset, '순자산'),
         fetchAndRender(E.cashflow,   renderCashflow,   '가계부'),
         fetchAndRender(E.target,     renderTargets,    '주식 목표'),
+        fetchAndRender(E.btc,        renderBtc,        'BTC'),
         loadFamilyPortfolio()
       ]);
     }
