@@ -14,7 +14,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
 
-  <title>Overview</title>
+  <title>Overview · 인생 자동화</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -123,7 +123,6 @@
     .w4-col.spend  .v { color: var(--purple); }
     .w4-col.rate   .v.pos { color: var(--pos); }
     .w4-col.rate   .v.neg { color: var(--neg); }
-    .w4-col .v.loading-cell { color: var(--ink-dim); }
     .w4-divider { height: 1px; background: var(--border); margin: 4px 0 12px; }
     .w4-save-label {
       display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;
@@ -335,6 +334,36 @@
       </div>
     </div>
 
+    <!-- W3: 부부 주식 합산 -->
+    <div class="w">
+      <div class="w-head">
+        <span class="w-title">부부 주식 합산</span>
+        <span class="w-tag">Daily</span>
+      </div>
+      <div class="w2">
+        <div class="w2-left">
+          <div class="amt">₩ 50,500,000</div>
+          <div class="ret"><span class="delta pos">▲ +100만</span> 전일 대비 <span class="pct pos">(+2.0%)</span></div>
+          <div class="stk">
+            <div class="row"><span class="d" style="background: var(--cat-stock);"></span><span class="nm">TSLA</span><span class="pc">35%</span></div>
+            <div class="row"><span class="d" style="background: var(--info);"></span><span class="nm">SCHD</span><span class="pc">22%</span></div>
+            <div class="row"><span class="d" style="background: var(--cat-btc);"></span><span class="nm">QQQ</span><span class="pc">18%</span></div>
+            <div class="row"><span class="d" style="background: var(--purple);"></span><span class="nm">etc</span><span class="pc">25%</span></div>
+          </div>
+        </div>
+        <div class="donut">
+          <svg width="86" height="86" viewBox="0 0 86 86" aria-hidden="true">
+            <circle cx="43" cy="43" r="32" fill="none" stroke="var(--border)" stroke-width="10"/>
+            <circle cx="43" cy="43" r="32" fill="none" stroke="var(--cat-stock)" stroke-width="10" stroke-dasharray="70 201"/>
+            <circle cx="43" cy="43" r="32" fill="none" stroke="var(--info)" stroke-width="10" stroke-dasharray="44 201" stroke-dashoffset="-70"/>
+            <circle cx="43" cy="43" r="32" fill="none" stroke="var(--cat-btc)" stroke-width="10" stroke-dasharray="36 201" stroke-dashoffset="-114"/>
+            <circle cx="43" cy="43" r="32" fill="none" stroke="var(--purple)" stroke-width="10" stroke-dasharray="50 201" stroke-dashoffset="-150"/>
+          </svg>
+          <div class="donut-c"><div class="v">8 종목</div><div class="l">holdings</div></div>
+        </div>
+      </div>
+    </div>
+
     <!-- W4: 주식 수량 목표 -->
     <div class="w w3">
       <div class="w-head">
@@ -423,7 +452,6 @@
   </div>
 
   <script>
-    // 헤더 시각
     (function () {
       const el = document.getElementById('ph-time');
       if (!el) return;
@@ -438,7 +466,6 @@
       setTimeout(() => { render(); setInterval(render, 60 * 1000); }, ms);
     })();
 
-    // ─── 유틸 ───────────────────────────────────────
     function formatDeltaUnit(amount) {
       const abs = Math.abs(amount);
       const sign = amount >= 0 ? '+' : '-';
@@ -470,7 +497,6 @@
       if (el) el.className = className;
     }
 
-    // ─── W1: 순자산 ────────────────────────────────
     function renderTotalAsset(data) {
       const years = data.years || [];
       if (years.length === 0) return;
@@ -504,48 +530,45 @@
       }
     }
 
-    // ─── W2: 가계부 ────────────────────────────────
     function renderCashflow(data) {
       const trend = data.trend || [];
       if (trend.length === 0) return;
-      const current = trend[trend.length - 1]; // 가장 최근 달
+      const current = trend[trend.length - 1];
       const income = current.income || 0;
       const expenses = current.expenses || 0;
       const net = current.net || 0;
       const rate = income > 0 ? net / income : 0;
 
-      // 태그: 202605 → 26.05
       const ym = String(current.ym || '');
       if (ym.length === 6) {
         setText('w-cashflow-tag', `${ym.slice(2,4)}.${ym.slice(4,6)}`);
       }
 
-      // 총 수입 / 총 지출
       setText('w-cashflow-income', fmtKRW(income));
       setText('w-cashflow-spend',  fmtKRW(expenses));
-      setClass('w-cashflow-income', 'v');
-      setClass('w-cashflow-spend',  'v');
 
-      // 저축률
       const cls = rate >= 0 ? 'pos' : 'neg';
       setText('w-cashflow-rate', (rate * 100).toFixed(1) + '%');
       setClass('w-cashflow-rate', 'v ' + cls);
 
-      // 순저축 + 분모
       const sign = net >= 0 ? '+' : '-';
       const netStr = `${sign}₩${Math.abs(net).toLocaleString('ko-KR')}`;
       setHTML('w-cashflow-save', `<span class="amt ${cls}">${netStr}</span> / ${fmtKRW(income)}`);
 
-      // 바
       const barEl = document.getElementById('w-cashflow-bar');
       if (barEl) {
         const w = Math.max(0, Math.min(100, rate * 100));
         barEl.style.width = w + '%';
         barEl.className = 'fill ' + cls;
       }
+
+      // 로딩 → 데이터 토글
+      const loadingEl = document.getElementById('w-cashflow-loading');
+      const dataEl = document.getElementById('w-cashflow-data');
+      if (loadingEl) loadingEl.style.display = 'none';
+      if (dataEl) dataEl.style.display = '';
     }
 
-    // ─── 데이터 fetch + 갱신 ───────────────────────
     async function fetchAndRender(endpoint, renderFn, label) {
       if (!endpoint) return;
       try {
@@ -561,7 +584,6 @@
       const cfg = window.HOME_CONFIG;
       if (!cfg || !cfg.ENDPOINTS) return;
       const E = cfg.ENDPOINTS;
-      // 병렬 fetch
       await Promise.all([
         fetchAndRender(E.totalAsset, renderTotalAsset, '순자산'),
         fetchAndRender(E.cashflow,   renderCashflow,   '가계부')
