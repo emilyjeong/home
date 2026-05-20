@@ -11,4 +11,4 @@ window.HOME_CONFIG = {
     cashflow:        'https://script.google.com/macros/s/AKfycbyNXsSIEwNWPnke1eYcYcm-GTl77-HyH-yi8OrdvwESnb7QQK6fDsqVsrvRy8fdqXzuhw/exec',
     btc:             ''
   }
-};
+}; 
