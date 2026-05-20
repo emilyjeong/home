@@ -14,7 +14,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
 
-  <title>Overview · 인생 자동화</title>
+  <title>Overview</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -315,46 +315,23 @@
         <span class="w-title">가계부</span>
         <span class="w-tag" id="w-cashflow-tag">···</span>
       </div>
-      <div class="w4-summary">
-        <div class="w4-col income"><div class="lbl">총 수입</div><div class="v loading-cell" id="w-cashflow-income">···</div></div>
-        <div class="w4-col spend"><div class="lbl">총 지출</div><div class="v loading-cell" id="w-cashflow-spend">···</div></div>
-        <div class="w4-col rate"><div class="lbl">저축률</div><div class="v loading-cell" id="w-cashflow-rate">···</div></div>
-      </div>
-      <div class="w4-divider"></div>
-      <div class="w4-save-label">
-        <span class="k">순저축</span>
-        <span class="v" id="w-cashflow-save"><span style="color: var(--ink-dim);">···</span></span>
-      </div>
-      <div class="w4-bar"><div class="fill" id="w-cashflow-bar" style="width: 0%;"></div></div>
-    </div>
 
-    <!-- W3: 부부 주식 합산 -->
-    <div class="w">
-      <div class="w-head">
-        <span class="w-title">부부 주식 합산</span>
-        <span class="w-tag">Daily</span>
+      <div id="w-cashflow-loading" style="padding: 6px 0;">
+        <span class="loading">가계부 불러오는 중<span class="loading-dots">..</span> <span class="pulse">💸</span></span>
       </div>
-      <div class="w2">
-        <div class="w2-left">
-          <div class="amt">₩ 50,500,000</div>
-          <div class="ret"><span class="delta pos">▲ +100만</span> 전일 대비 <span class="pct pos">(+2.0%)</span></div>
-          <div class="stk">
-            <div class="row"><span class="d" style="background: var(--cat-stock);"></span><span class="nm">TSLA</span><span class="pc">35%</span></div>
-            <div class="row"><span class="d" style="background: var(--info);"></span><span class="nm">SCHD</span><span class="pc">22%</span></div>
-            <div class="row"><span class="d" style="background: var(--cat-btc);"></span><span class="nm">QQQ</span><span class="pc">18%</span></div>
-            <div class="row"><span class="d" style="background: var(--purple);"></span><span class="nm">etc</span><span class="pc">25%</span></div>
-          </div>
+
+      <div id="w-cashflow-data" style="display: none;">
+        <div class="w4-summary">
+          <div class="w4-col income"><div class="lbl">총 수입</div><div class="v" id="w-cashflow-income">—</div></div>
+          <div class="w4-col spend"><div class="lbl">총 지출</div><div class="v" id="w-cashflow-spend">—</div></div>
+          <div class="w4-col rate"><div class="lbl">저축률</div><div class="v" id="w-cashflow-rate">—</div></div>
         </div>
-        <div class="donut">
-          <svg width="86" height="86" viewBox="0 0 86 86" aria-hidden="true">
-            <circle cx="43" cy="43" r="32" fill="none" stroke="var(--border)" stroke-width="10"/>
-            <circle cx="43" cy="43" r="32" fill="none" stroke="var(--cat-stock)" stroke-width="10" stroke-dasharray="70 201"/>
-            <circle cx="43" cy="43" r="32" fill="none" stroke="var(--info)" stroke-width="10" stroke-dasharray="44 201" stroke-dashoffset="-70"/>
-            <circle cx="43" cy="43" r="32" fill="none" stroke="var(--cat-btc)" stroke-width="10" stroke-dasharray="36 201" stroke-dashoffset="-114"/>
-            <circle cx="43" cy="43" r="32" fill="none" stroke="var(--purple)" stroke-width="10" stroke-dasharray="50 201" stroke-dashoffset="-150"/>
-          </svg>
-          <div class="donut-c"><div class="v">8 종목</div><div class="l">holdings</div></div>
+        <div class="w4-divider"></div>
+        <div class="w4-save-label">
+          <span class="k">순저축</span>
+          <span class="v" id="w-cashflow-save">—</span>
         </div>
+        <div class="w4-bar"><div class="fill" id="w-cashflow-bar" style="width: 0%;"></div></div>
       </div>
     </div>
 
