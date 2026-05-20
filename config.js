@@ -9,6 +9,6 @@ window.HOME_CONFIG = {
     familyPortfolio: 'https://script.google.com/macros/s/AKfycbw4ToimVLx0Q_qTwaJyGw0Z0-NBcbl89NrYb3w_aUI_eknj9iJ3CsRMH_fM5kQ7SQcluQ/exec',
     target:          'https://script.google.com/macros/s/AKfycbw4ToimVLx0Q_qTwaJyGw0Z0-NBcbl89NrYb3w_aUI_eknj9iJ3CsRMH_fM5kQ7SQcluQ/exec?action=targets',
     cashflow:        'https://script.google.com/macros/s/AKfycbyNXsSIEwNWPnke1eYcYcm-GTl77-HyH-yi8OrdvwESnb7QQK6fDsqVsrvRy8fdqXzuhw/exec',
-    btc:             ''
+    btc:             'https://script.google.com/macros/s/AKfycbyQ7hg4GJBCPv4g3IDIwW6SHwvZ9bZHXGMkJgpkIDZWU4PI9nOUqIshofc94LdpL_oG/exec'
   }
 };
