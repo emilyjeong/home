@@ -443,8 +443,8 @@
         ...(data.wife && data.wife.holdings || []),
         ...(data.husband && data.husband.holdings || [])
       ];
-      const stocks  = all.filter(h => h.account !== 'KB');
-      const pension = all.filter(h => h.account === 'KB');
+      const stocks  = all.filter(h => h.account !== 'KB' && h.account !== 'NH');
+      const pension = all.filter(h => h.account === 'KB' || h.account === 'NH');
 
       const sumValue = a => a.reduce((s, h) => s + (h.value || 0), 0);
       const sumCost  = a => a.reduce((s, h) => s + ((h.qty || 0) * (h.avg || 0)), 0);
